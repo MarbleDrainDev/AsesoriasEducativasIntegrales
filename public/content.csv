@@ -1,0 +1,56 @@
+type,section,field,value
+site,,title,Ejemplo de Página Web
+site,,tagline,Sitio estático con contenido editable por personas no técnicas.
+site,,brand,EjemploWb
+site,,ctaText,Hablar con ventas
+site,,ctaLink,#contacto
+menu,inicio,,Inicio
+menu,nosotros,,Nosotros
+menu,servicios,,Servicios
+menu,proyectos,,Proyectos
+menu,contacto,,Contacto
+sidemenu,,title,Menú rápido
+sideitem,atajo-inicio,Resumen,inicio
+sideitem,atajo-nosotros,Equipo,nosotros
+sideitem,atajo-servicios,Planes,servicios
+sideitem,atajo-proyectos,Casos,proyectos
+sideitem,atajo-contacto,Contacto rápido,contacto
+sideitem,atajo-teclados,Teclados mecánicos,teclados
+section,inicio,title,Todo lo que necesitas para empezar rápido
+section,inicio,subtitle,Cambia textos e instrucciones sin tocar el código.
+section,inicio,body,Este bloque es el mensaje principal. Actualiza el texto según tu negocio.
+highlight,inicio,,Sitio 100% estático
+highlight,inicio,,Contenido editable
+highlight,inicio,,Diseño responsive
+section,nosotros,title,Un equipo enfocado en resultados
+section,nosotros,body,Describe aquí la historia, misión y visión. Mantén frases claras.
+value,nosotros,Transparencia,Comunicación clara y honesta en cada etapa.
+value,nosotros,Calidad,Procesos consistentes para mantener un alto estándar.
+value,nosotros,Cercanía,Acompañamiento continuo para tus clientes.
+section,servicios,title,Servicios principales
+section,servicios,body,Enumera los servicios que ofreces. Cada tarjeta es editable.
+card,servicios,Estrategia,"Definimos objetivos, cronograma y métricas."
+card,servicios,Diseño,Creamos propuestas visuales modernas y claras.
+card,servicios,Soporte,Te acompañamos después del lanzamiento.
+section,proyectos,title,Casos y proyectos
+section,proyectos,body,Muestra resultados o referencias. Cambia títulos y descripciones.
+item,proyectos,Proyecto Alfa,Aumento de conversiones en 30%.
+item,proyectos,Proyecto Beta,Rediseño completo en 4 semanas.
+item,proyectos,Proyecto Gamma,Lanzamiento rápido con métricas claras.
+section,contacto,title,Hablemos de tu idea
+section,contacto,body,Incluye aquí la información básica de contacto y un llamado a la acción.
+contact,contacto,Correo,hola@tudominio.com
+contact,contacto,Teléfono,+34 600 000 000
+contact,contacto,Ubicación,"Madrid, ES"
+section,contacto,buttonText,Escribir correo
+section,contacto,buttonLink,mailto:hola@tudominio.com
+section,teclados,title,Teclados mecánicos
+section,teclados,subtitle,"Sensación, precisión y personalización."
+section,teclados,body,"Explica aquí los beneficios: switches, retroiluminación, materiales y tipos de uso (gaming, escritura, trabajo)."
+highlight,teclados,,Switches lineales o táctiles
+highlight,teclados,,Keycaps personalizables
+highlight,teclados,,Durabilidad superior
+card,teclados,Switches,"Lineales, táctiles o clicky según tu preferencia."
+card,teclados,Diseño,Layout compacto o completo según tu espacio.
+card,teclados,Experiencia,Escritura cómoda y respuesta inmediata.
+footer,,text,© 2026 EjemploWb. Todos los derechos reservados.
