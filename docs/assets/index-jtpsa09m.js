@@ -1,7 +1,7 @@
-(function(){let e=document.createElement(`link`).relList;if(e&&e.supports&&e.supports(`modulepreload`))return;for(let e of document.querySelectorAll(`link[rel="modulepreload"]`))n(e);new MutationObserver(e=>{for(let t of e)if(t.type===`childList`)for(let e of t.addedNodes)e.tagName===`LINK`&&e.rel===`modulepreload`&&n(e)}).observe(document,{childList:!0,subtree:!0});function t(e){let t={};return e.integrity&&(t.integrity=e.integrity),e.referrerPolicy&&(t.referrerPolicy=e.referrerPolicy),e.crossOrigin===`use-credentials`?t.credentials=`include`:e.crossOrigin===`anonymous`?t.credentials=`omit`:t.credentials=`same-origin`,t}function n(e){if(e.ep)return;e.ep=!0;let n=t(e);fetch(e.href,n)}})();var e=`modulepreload`,t=function(e){return`/AsesoriasEducativasIntegrales/`+e},n={};const r=function(r,i,a){let o=Promise.resolve();if(i&&i.length>0){let r=document.getElementsByTagName(`link`),s=document.querySelector(`meta[property=csp-nonce]`),c=s?.nonce||s?.getAttribute(`nonce`);function l(e){return Promise.all(e.map(e=>Promise.resolve(e).then(e=>({status:`fulfilled`,value:e}),e=>({status:`rejected`,reason:e}))))}o=l(i.map(i=>{if(i=t(i,a),i in n)return;n[i]=!0;let o=i.endsWith(`.css`),s=o?`[rel="stylesheet"]`:``;if(a)for(let e=r.length-1;e>=0;e--){let t=r[e];if(t.href===i&&(!o||t.rel===`stylesheet`))return}else if(document.querySelector(`link[href="${i}"]${s}`))return;let l=document.createElement(`link`);if(l.rel=o?`stylesheet`:e,o||(l.as=`script`),l.crossOrigin=``,l.href=i,c&&l.setAttribute(`nonce`,c),document.head.appendChild(l),o)return new Promise((e,t)=>{l.addEventListener(`load`,e),l.addEventListener(`error`,()=>t(Error(`Unable to preload CSS for ${i}`)))})}))}function s(e){let t=new Event(`vite:preloadError`,{cancelable:!0});if(t.payload=e,window.dispatchEvent(t),!t.defaultPrevented)throw e}return o.then(e=>{for(let t of e||[])t.status===`rejected`&&s(t.reason);return r().catch(s)})};var i=document.querySelector(`#app`),a=e=>{if(!e)return``;let t=e.split(`
-`),n=``,r=!1,i=!1,a=e=>e.replace(/:warning:/g,`⚠️`).replace(/:memo:/g,`📝`).replace(/:bulb:/g,`💡`);for(let e of t){let t=e.trim();if(!t){r&&=(n+=`</ul>`,!1),i&&=(n+=`</blockquote>`,!1);continue}if(t.startsWith(`<`)&&t.endsWith(`>`)){r&&=(n+=`</ul>`,!1),i&&=(n+=`</blockquote>`,!1),n+=a(t);continue}if(t.startsWith(`>`)){i||=(n+=`<blockquote>`,!0);let e=a(t.replace(/^>\s?/,``)).replace(/!\[(.*?)\]\((.*?)\)/g,`<img src="$2" alt="$1" loading="lazy" />`).replace(/\[(.*?)\]\((.*?)\)/g,`<a href="$2">$1</a>`).replace(/\*\*(.*?)\*\*/g,`<strong>$1</strong>`).replace(/\*(.*?)\*/g,`<em>$1</em>`);n+=`<p>${e}</p>`;continue}if(t.startsWith(`### `)){n+=`<h3>${t.slice(4)}</h3>`;continue}if(t.startsWith(`## `)){n+=`<h2>${t.slice(3)}</h2>`;continue}if(t.startsWith(`# `)){n+=`<h1>${t.slice(2)}</h1>`;continue}if(t.startsWith(`- `)){r||(r=!0,n+=`<ul>`),n+=`<li>${t.slice(2)}</li>`;continue}let o=a(t).replace(/!\[(.*?)\]\((.*?)\)/g,`<img src="$2" alt="$1" loading="lazy" />`).replace(/\[(.*?)\]\((.*?)\)/g,`<a href="$2">$1</a>`).replace(/\*\*(.*?)\*\*/g,`<strong>$1</strong>`).replace(/\*(.*?)\*/g,`<em>$1</em>`);n+=`<p>${o}</p>`}return r&&(n+=`</ul>`),n},o=Object.assign({"./sections/ConceptosMD.md":()=>r(()=>import(`./ConceptosMD-CAjuX91L.js`),[]).then(e=>e.default),"./sections/Contabilidad.md":()=>r(()=>import(`./Contabilidad-CVKISGyl.js`),[]).then(e=>e.default),"./sections/Test.md":()=>r(()=>import(`./Test-BkNDArV2.js`),[]).then(e=>e.default),"./sections/ccccccccc.md":()=>r(()=>import(`./ccccccccc-CsgV35oZ.js`),[]).then(e=>e.default),"./sections/emprendimiento.md":()=>r(()=>import(`./emprendimiento-BChzMrZJ.js`),[]).then(e=>e.default),"./sections/servicios-extra.md":()=>r(()=>import(`./servicios-extra-B0UiajKW.js`),[]).then(e=>e.default)}),s=()=>Object.keys(o).map(e=>e.split(`/`).pop()).map(e=>e.replace(/\.md$/i,``)).filter(Boolean),c=async e=>{let t=o[`./sections/${e}.md`];if(!t)return null;let n=await t();return n?.trim()?n:null},l=async e=>{let t=e.querySelectorAll(`[data-md-src]`);for(let e of t){let t=e.getAttribute(`data-md-src`);if(!t)continue;let n=await c(t);n&&(e.innerHTML=a(n))}},u=e=>{let t=e.replace(/[-_]+/g,` `).trim();return t.charAt(0).toUpperCase()+t.slice(1)},d=e=>{let t=document.createElement(`section`);return t.className=`section`,t.id=e,t.dataset.view=e,t.innerHTML=`
+(function(){let e=document.createElement(`link`).relList;if(e&&e.supports&&e.supports(`modulepreload`))return;for(let e of document.querySelectorAll(`link[rel="modulepreload"]`))n(e);new MutationObserver(e=>{for(let t of e)if(t.type===`childList`)for(let e of t.addedNodes)e.tagName===`LINK`&&e.rel===`modulepreload`&&n(e)}).observe(document,{childList:!0,subtree:!0});function t(e){let t={};return e.integrity&&(t.integrity=e.integrity),e.referrerPolicy&&(t.referrerPolicy=e.referrerPolicy),e.crossOrigin===`use-credentials`?t.credentials=`include`:e.crossOrigin===`anonymous`?t.credentials=`omit`:t.credentials=`same-origin`,t}function n(e){if(e.ep)return;e.ep=!0;let n=t(e);fetch(e.href,n)}})();var e=`modulepreload`,t=function(e){return`/AsesoriasEducativasIntegrales/`+e},n={};const r=function(r,i,a){let o=Promise.resolve();if(i&&i.length>0){let r=document.getElementsByTagName(`link`),s=document.querySelector(`meta[property=csp-nonce]`),c=s?.nonce||s?.getAttribute(`nonce`);function l(e){return Promise.all(e.map(e=>Promise.resolve(e).then(e=>({status:`fulfilled`,value:e}),e=>({status:`rejected`,reason:e}))))}o=l(i.map(i=>{if(i=t(i,a),i in n)return;n[i]=!0;let o=i.endsWith(`.css`),s=o?`[rel="stylesheet"]`:``;if(a)for(let e=r.length-1;e>=0;e--){let t=r[e];if(t.href===i&&(!o||t.rel===`stylesheet`))return}else if(document.querySelector(`link[href="${i}"]${s}`))return;let l=document.createElement(`link`);if(l.rel=o?`stylesheet`:e,o||(l.as=`script`),l.crossOrigin=``,l.href=i,c&&l.setAttribute(`nonce`,c),document.head.appendChild(l),o)return new Promise((e,t)=>{l.addEventListener(`load`,e),l.addEventListener(`error`,()=>t(Error(`Unable to preload CSS for ${i}`)))})}))}function s(e){let t=new Event(`vite:preloadError`,{cancelable:!0});if(t.payload=e,window.dispatchEvent(t),!t.defaultPrevented)throw e}return o.then(e=>{for(let t of e||[])t.status===`rejected`&&s(t.reason);return r().catch(s)})};var i=document.querySelector(`#app`),a=`/AsesoriasEducativasIntegrales/`,o=e=>{if(!e)return``;let t=e.split(`
+`),n=``,r=!1,i=!1,a=e=>e.replace(/:warning:/g,`⚠️`).replace(/:memo:/g,`📝`).replace(/:bulb:/g,`💡`);for(let e of t){let t=e.trim();if(!t){r&&=(n+=`</ul>`,!1),i&&=(n+=`</blockquote>`,!1);continue}if(t.startsWith(`<`)&&t.endsWith(`>`)){r&&=(n+=`</ul>`,!1),i&&=(n+=`</blockquote>`,!1),n+=a(t);continue}if(t.startsWith(`>`)){i||=(n+=`<blockquote>`,!0);let e=a(t.replace(/^>\s?/,``)).replace(/!\[(.*?)\]\((.*?)\)/g,`<img src="$2" alt="$1" loading="lazy" />`).replace(/\[(.*?)\]\((.*?)\)/g,`<a href="$2">$1</a>`).replace(/\*\*(.*?)\*\*/g,`<strong>$1</strong>`).replace(/\*(.*?)\*/g,`<em>$1</em>`);n+=`<p>${e}</p>`;continue}if(t.startsWith(`### `)){n+=`<h3>${t.slice(4)}</h3>`;continue}if(t.startsWith(`## `)){n+=`<h2>${t.slice(3)}</h2>`;continue}if(t.startsWith(`# `)){n+=`<h1>${t.slice(2)}</h1>`;continue}if(t.startsWith(`- `)){r||(r=!0,n+=`<ul>`),n+=`<li>${t.slice(2)}</li>`;continue}let o=a(t).replace(/!\[(.*?)\]\((.*?)\)/g,`<img src="$2" alt="$1" loading="lazy" />`).replace(/\[(.*?)\]\((.*?)\)/g,`<a href="$2">$1</a>`).replace(/\*\*(.*?)\*\*/g,`<strong>$1</strong>`).replace(/\*(.*?)\*/g,`<em>$1</em>`);n+=`<p>${o}</p>`}return r&&(n+=`</ul>`),n},s=Object.assign({"./sections/ConceptosMD.md":()=>r(()=>import(`./ConceptosMD-CAjuX91L.js`),[]).then(e=>e.default),"./sections/Contabilidad.md":()=>r(()=>import(`./Contabilidad-CVKISGyl.js`),[]).then(e=>e.default),"./sections/Test.md":()=>r(()=>import(`./Test-BkNDArV2.js`),[]).then(e=>e.default),"./sections/ccccccccc.md":()=>r(()=>import(`./ccccccccc-CsgV35oZ.js`),[]).then(e=>e.default),"./sections/emprendimiento.md":()=>r(()=>import(`./emprendimiento-BChzMrZJ.js`),[]).then(e=>e.default),"./sections/servicios-extra.md":()=>r(()=>import(`./servicios-extra-B0UiajKW.js`),[]).then(e=>e.default)}),c=()=>Object.keys(s).map(e=>e.split(`/`).pop()).map(e=>e.replace(/\.md$/i,``)).filter(Boolean),l=async e=>{let t=s[`./sections/${e}.md`];if(!t)return null;let n=await t();return n?.trim()?n:null},u=async e=>{let t=e.querySelectorAll(`[data-md-src]`);for(let e of t){let t=e.getAttribute(`data-md-src`);if(!t)continue;let n=await l(t);n&&(e.innerHTML=o(n))}},d=e=>{let t=e.replace(/[-_]+/g,` `).trim();return t.charAt(0).toUpperCase()+t.slice(1)},f=e=>{let t=document.createElement(`section`);return t.className=`section`,t.id=e,t.dataset.view=e,t.innerHTML=`
     <div class="section-header">
-      <h2>${u(e)}</h2>
+      <h2>${d(e)}</h2>
     </div>
     <div class="editable-md" data-md-src="${e}"></div>
   `,t};(async()=>{document.title=`Ejemplo de Página Web`,i.innerHTML=`
@@ -26,7 +26,7 @@
           </div>
         </div>
         <div class="brand">
-          <img src="/assets/vite.svg" alt="Logo" class="brand-mark">
+          <img src="${a}assets/vite.svg" alt="Logo" class="brand-mark">
           <div>
             <p class="brand-title">Ejemplo de Página Web</p>
             <p class="brand-tagline">Plantilla estática con contenido editable y arquitectura decoupled.</p>
@@ -197,12 +197,12 @@
               <h4>Imágenes</h4>
               <div class="example-container">
                 <div class="example-code">
-                  <pre><code>![Alt texto](/assets/vite.svg)
+                  <pre><code>![Alt texto](${a}assets/vite.svg)
 ![Logo](./image.png width=200)</code></pre>
-                  <button class="copy-btn" data-code="![Alt texto](/assets/vite.svg)&#10;![Logo](./image.png width=200)">📋 Copiar</button>
+                  <button class="copy-btn" data-code="![Alt texto](${a}assets/vite.svg)&#10;![Logo](./image.png width=200)">📋 Copiar</button>
                 </div>
                 <div class="example-preview editable-md">
-                  <p><img src="/assets/vite.svg" alt="Alt texto" loading="lazy" style="max-width: 150px;"/></p>
+                  <p><img src="${a}assets/vite.svg" alt="Alt texto" loading="lazy" style="max-width: 150px;"/></p>
                 </div>
               </div>
             </div>
@@ -303,14 +303,14 @@ controls&gt;
               <h4>Descargar PDF</h4>
               <div class="example-container">
                 <div class="example-code">
-                  <pre><code>&lt;a href="/archivos/documento.pdf" 
+                  <pre><code>&lt;a href="${a}archivos/documento.pdf" 
 download&gt;
   📥 Descargar PDF
 &lt;/a&gt;</code></pre>
-                  <button class="copy-btn" data-code="&lt;a href=&quot;/archivos/documento.pdf&quot; download&gt;&#10;  📥 Descargar PDF&#10;&lt;/a&gt;">📋 Copiar</button>
+                  <button class="copy-btn" data-code="&lt;a href=&quot;${a}archivos/documento.pdf&quot; download&gt;&#10;  📥 Descargar PDF&#10;&lt;/a&gt;">📋 Copiar</button>
                 </div>
                 <div class="example-preview editable-md">
-                  <a href="/archivos/Formamos-lideres-transformacion-digital-IA.pdf" download style="display: inline-block; padding: 0.75rem 1.5rem; background: rgba(59, 130, 246, 0.2); border: 1px solid rgba(59, 130, 246, 0.4); border-radius: 8px; color: #60a5fa; text-decoration: none; cursor: pointer;">📥 Descargar PDF</a>
+                  <a href="${a}archivos/Formamos-lideres-transformacion-digital-IA.pdf" download style="display: inline-block; padding: 0.75rem 1.5rem; background: rgba(59, 130, 246, 0.2); border: 1px solid rgba(59, 130, 246, 0.4); border-radius: 8px; color: #60a5fa; text-decoration: none; cursor: pointer;">📥 Descargar PDF</a>
                 </div>
               </div>
             </div>
@@ -319,12 +319,12 @@ download&gt;
               <h4>PDF incrustado (iframe)</h4>
               <div class="example-container">
                 <div class="example-code">
-                  <pre><code>&lt;iframe src="/archivos/documento.pdf"
+                  <pre><code>&lt;iframe src="${a}archivos/documento.pdf"
 width="100%" height="500"&gt;&lt;/iframe&gt;</code></pre>
-                  <button class="copy-btn" data-code="&lt;iframe src=&quot;/archivos/documento.pdf&quot; width=&quot;100%&quot; height=&quot;500&quot;&gt;&lt;/iframe&gt;">📋 Copiar</button>
+                  <button class="copy-btn" data-code="&lt;iframe src=&quot;${a}archivos/documento.pdf&quot; width=&quot;100%&quot; height=&quot;500&quot;&gt;&lt;/iframe&gt;">📋 Copiar</button>
                 </div>
                 <div class="example-preview editable-md">
-                  <iframe src="/archivos/Formamos-lideres-transformacion-digital-IA.pdf" width="100%" height="500" style="border: none; border-radius: 8px;"></iframe>
+                  <iframe src="${a}archivos/Formamos-lideres-transformacion-digital-IA.pdf" width="100%" height="500" style="border: none; border-radius: 8px;"></iframe>
                 </div>
               </div>
             </div>
@@ -333,12 +333,12 @@ width="100%" height="500"&gt;&lt;/iframe&gt;</code></pre>
               <h4>PDF con embed</h4>
               <div class="example-container">
                 <div class="example-code">
-                  <pre><code>&lt;embed src="/archivos/documento.pdf"
+                  <pre><code>&lt;embed src="${a}archivos/documento.pdf"
 width="100%" height="500" type="application/pdf"/&gt;</code></pre>
-                  <button class="copy-btn" data-code="&lt;embed src=&quot;/archivos/documento.pdf&quot; width=&quot;100%&quot; height=&quot;500&quot; type=&quot;application/pdf&quot;/&gt;">📋 Copiar</button>
+                  <button class="copy-btn" data-code="&lt;embed src=&quot;${a}archivos/documento.pdf&quot; width=&quot;100%&quot; height=&quot;500&quot; type=&quot;application/pdf&quot;/&gt;">📋 Copiar</button>
                 </div>
                 <div class="example-preview editable-md" style="display: flex; align-items: center; justify-content: center;">
-                  <a href="/archivos/Formamos-lideres-transformacion-digital-IA.pdf" style="display: inline-block; padding: 0.75rem 1.5rem; background: rgba(59, 130, 246, 0.2); border: 1px solid rgba(59, 130, 246, 0.4); border-radius: 8px; color: #60a5fa; text-decoration: none; cursor: pointer;">📄 Ver PDF</a>
+                  <a href="${a}archivos/Formamos-lideres-transformacion-digital-IA.pdf" style="display: inline-block; padding: 0.75rem 1.5rem; background: rgba(59, 130, 246, 0.2); border: 1px solid rgba(59, 130, 246, 0.4); border-radius: 8px; color: #60a5fa; text-decoration: none; cursor: pointer;">📄 Ver PDF</a>
                 </div>
               </div>
             </div>
@@ -348,7 +348,7 @@ width="100%" height="500" type="application/pdf"/&gt;</code></pre>
         <section id="nosotros" class="section profile-section">
           <div class="profile-grid">
             <aside class="profile-aside">
-              <div class="avatar"><img src="/assets/vite.svg" alt="Foto de perfil" loading="lazy"/></div>
+              <div class="avatar"><img src="${a}assets/vite.svg" alt="Foto de perfil" loading="lazy"/></div>
               <h3 class="profile-name">Perfil docente</h3>
               <p class="profile-role">Especialista en Contabilidad y Emprendimiento</p>
               <div class="profile-contacts">
@@ -448,5 +448,5 @@ width="100%" height="500" type="application/pdf"/&gt;</code></pre>
         <p>© 2026 EjemploWb. Todos los derechos reservados.</p>
       </footer>
     </div>
-  `;let e=i.querySelector(`#site-menu`),t=i.querySelector(`.menu-toggle`),n=i.querySelector(`#main-content`),r=i.querySelector(`.side-list`),a=(e,t)=>{if(r.querySelector(`[data-target="${e}"]`))return;let n=document.createElement(`button`);n.className=`side-link`,n.type=`button`,n.dataset.target=e,n.textContent=t,r.appendChild(n)},o=e=>{r.querySelectorAll(`.side-link`).forEach(t=>{t.classList.toggle(`is-active`,t.dataset.target===e)})},c=t=>{let r=[...n.querySelectorAll(`.section`)],i=!1;r.forEach(e=>{let n=e.id===t;n&&(i=!0),e.classList.toggle(`is-active`,n)}),!i&&r.length>0&&(r[0].classList.add(`is-active`),t=r[0].id),e.querySelectorAll(`a`).forEach(e=>{e.classList.toggle(`is-active`,e.dataset.view===t)}),o(t);try{localStorage.setItem(`lastView`,t)}catch{}},f=(()=>{try{return localStorage.getItem(`lastView`)||``}catch{return``}})(),p=window.location.hash?.replace(`#`,``)||f||`inicio`;p&&c(p),e.addEventListener(`click`,n=>{if(n.target.matches(`a`)){n.preventDefault();let r=n.target.dataset.view;r&&(window.location.hash=r,c(r),e.classList.remove(`open`),t.setAttribute(`aria-expanded`,`false`))}}),t.addEventListener(`click`,()=>{let n=e.classList.toggle(`open`);t.setAttribute(`aria-expanded`,String(n))}),r.addEventListener(`click`,e=>{if(e.target.matches(`.side-link`)){let t=e.target.dataset.target;t&&(window.location.hash=t,c(t))}}),i.addEventListener(`click`,e=>{if(e.target.matches(`.copy-btn`)){let t=e.target.getAttribute(`data-code`);if(t){let n=t.replace(/&#10;/g,`
-`);navigator.clipboard.writeText(n).then(()=>{let t=e.target.textContent;e.target.textContent=`✓ Copiado`,setTimeout(()=>{e.target.textContent=t},2e3)})}}}),window.addEventListener(`hashchange`,()=>{let e=window.location.hash?.replace(`#`,``);e&&c(e)});let m=new Set([...i.querySelectorAll(`[data-md-src]`)].map(e=>e.getAttribute(`data-md-src`)).filter(Boolean)),h=s().filter(e=>!m.has(e));if(h.length)for(let e of h){let t=d(e);n.appendChild(t),a(e,u(e))}await l(i)})();
+  `;let e=i.querySelector(`#site-menu`),t=i.querySelector(`.menu-toggle`),n=i.querySelector(`#main-content`),r=i.querySelector(`.side-list`),o=(e,t)=>{if(r.querySelector(`[data-target="${e}"]`))return;let n=document.createElement(`button`);n.className=`side-link`,n.type=`button`,n.dataset.target=e,n.textContent=t,r.appendChild(n)},s=e=>{r.querySelectorAll(`.side-link`).forEach(t=>{t.classList.toggle(`is-active`,t.dataset.target===e)})},l=t=>{let r=[...n.querySelectorAll(`.section`)],i=!1;r.forEach(e=>{let n=e.id===t;n&&(i=!0),e.classList.toggle(`is-active`,n)}),!i&&r.length>0&&(r[0].classList.add(`is-active`),t=r[0].id),e.querySelectorAll(`a`).forEach(e=>{e.classList.toggle(`is-active`,e.dataset.view===t)}),s(t);try{localStorage.setItem(`lastView`,t)}catch{}},p=(()=>{try{return localStorage.getItem(`lastView`)||``}catch{return``}})(),m=window.location.hash?.replace(`#`,``)||p||`inicio`;m&&l(m),e.addEventListener(`click`,n=>{if(n.target.matches(`a`)){n.preventDefault();let r=n.target.dataset.view;r&&(window.location.hash=r,l(r),e.classList.remove(`open`),t.setAttribute(`aria-expanded`,`false`))}}),t.addEventListener(`click`,()=>{let n=e.classList.toggle(`open`);t.setAttribute(`aria-expanded`,String(n))}),r.addEventListener(`click`,e=>{if(e.target.matches(`.side-link`)){let t=e.target.dataset.target;t&&(window.location.hash=t,l(t))}}),i.addEventListener(`click`,e=>{if(e.target.matches(`.copy-btn`)){let t=e.target.getAttribute(`data-code`);if(t){let n=t.replace(/&#10;/g,`
+`);navigator.clipboard.writeText(n).then(()=>{let t=e.target.textContent;e.target.textContent=`✓ Copiado`,setTimeout(()=>{e.target.textContent=t},2e3)})}}}),window.addEventListener(`hashchange`,()=>{let e=window.location.hash?.replace(`#`,``);e&&l(e)});let h=new Set([...i.querySelectorAll(`[data-md-src]`)].map(e=>e.getAttribute(`data-md-src`)).filter(Boolean)),g=c().filter(e=>!h.has(e));if(g.length)for(let e of g){let t=f(e);n.appendChild(t),o(e,d(e))}await u(i)})();
