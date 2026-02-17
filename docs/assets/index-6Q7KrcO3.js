@@ -4,7 +4,7 @@
       <h2>${d(e)}</h2>
     </div>
     <div class="editable-md" data-md-src="${e}"></div>
-  `,t};(async()=>{document.title=`Ejemplo de Página Web`,i.innerHTML=`
+  `,t};(async()=>{document.title=`Asesorías Educativas Integrales`,i.innerHTML=`
     <div class="page">
       <header class="header">
         <div class="drawer-wrapper">

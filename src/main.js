@@ -102,7 +102,7 @@ const createAutoMdSection = (id) => {
 }
 
 const renderApp = async () => {
-  document.title = 'Ejemplo de Página Web'
+  document.title = 'Asesorías Educativas Integrales'
   app.innerHTML = `
     <div class="page">
       <header class="header">
