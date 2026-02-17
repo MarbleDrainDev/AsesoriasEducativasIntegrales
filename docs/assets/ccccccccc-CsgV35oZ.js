@@ -1,0 +1,1 @@
+var e=`ghdghfdghfd `;export{e as default};
