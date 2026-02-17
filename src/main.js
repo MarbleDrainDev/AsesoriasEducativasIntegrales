@@ -402,14 +402,14 @@ controls&gt;
               <h4>Descargar PDF</h4>
               <div class="example-container">
                 <div class="example-code">
-                  <pre><code>&lt;a href="/archivos/documento.pdf" 
+                  <pre><code>&lt;a href="${baseUrl}archivos/documento.pdf" 
 download&gt;
   📥 Descargar PDF
 &lt;/a&gt;</code></pre>
-                  <button class="copy-btn" data-code="&lt;a href=&quot;/archivos/documento.pdf&quot; download&gt;&#10;  📥 Descargar PDF&#10;&lt;/a&gt;">📋 Copiar</button>
+                  <button class="copy-btn" data-code="&lt;a href=&quot;${baseUrl}archivos/documento.pdf&quot; download&gt;&#10;  📥 Descargar PDF&#10;&lt;/a&gt;">📋 Copiar</button>
                 </div>
                 <div class="example-preview editable-md">
-                  <a href="/archivos/Formamos-lideres-transformacion-digital-IA.pdf" download style="display: inline-block; padding: 0.75rem 1.5rem; background: rgba(59, 130, 246, 0.2); border: 1px solid rgba(59, 130, 246, 0.4); border-radius: 8px; color: #60a5fa; text-decoration: none; cursor: pointer;">📥 Descargar PDF</a>
+                  <a href="${baseUrl}archivos/Formamos-lideres-transformacion-digital-IA.pdf" download style="display: inline-block; padding: 0.75rem 1.5rem; background: rgba(59, 130, 246, 0.2); border: 1px solid rgba(59, 130, 246, 0.4); border-radius: 8px; color: #60a5fa; text-decoration: none; cursor: pointer;">📥 Descargar PDF</a>
                 </div>
               </div>
             </div>
@@ -418,12 +418,12 @@ download&gt;
               <h4>PDF incrustado (iframe)</h4>
               <div class="example-container">
                 <div class="example-code">
-                  <pre><code>&lt;iframe src="/archivos/documento.pdf"
+                  <pre><code>&lt;iframe src="${baseUrl}archivos/documento.pdf"
 width="100%" height="500"&gt;&lt;/iframe&gt;</code></pre>
-                  <button class="copy-btn" data-code="&lt;iframe src=&quot;/archivos/documento.pdf&quot; width=&quot;100%&quot; height=&quot;500&quot;&gt;&lt;/iframe&gt;">📋 Copiar</button>
+                  <button class="copy-btn" data-code="&lt;iframe src=&quot;${baseUrl}archivos/documento.pdf&quot; width=&quot;100%&quot; height=&quot;500&quot;&gt;&lt;/iframe&gt;">📋 Copiar</button>
                 </div>
                 <div class="example-preview editable-md">
-                  <iframe src="/archivos/Formamos-lideres-transformacion-digital-IA.pdf" width="100%" height="500" style="border: none; border-radius: 8px;"></iframe>
+                  <iframe src="${baseUrl}archivos/Formamos-lideres-transformacion-digital-IA.pdf" width="100%" height="500" style="border: none; border-radius: 8px;"></iframe>
                 </div>
               </div>
             </div>
@@ -432,12 +432,12 @@ width="100%" height="500"&gt;&lt;/iframe&gt;</code></pre>
               <h4>PDF con embed</h4>
               <div class="example-container">
                 <div class="example-code">
-                  <pre><code>&lt;embed src="/archivos/documento.pdf"
+                  <pre><code>&lt;embed src="${baseUrl}archivos/documento.pdf"
 width="100%" height="500" type="application/pdf"/&gt;</code></pre>
-                  <button class="copy-btn" data-code="&lt;embed src=&quot;/archivos/documento.pdf&quot; width=&quot;100%&quot; height=&quot;500&quot; type=&quot;application/pdf&quot;/&gt;">📋 Copiar</button>
+                  <button class="copy-btn" data-code="&lt;embed src=&quot;${baseUrl}archivos/documento.pdf&quot; width=&quot;100%&quot; height=&quot;500&quot; type=&quot;application/pdf&quot;/&gt;">📋 Copiar</button>
                 </div>
                 <div class="example-preview editable-md" style="display: flex; align-items: center; justify-content: center;">
-                  <a href="/archivos/Formamos-lideres-transformacion-digital-IA.pdf" style="display: inline-block; padding: 0.75rem 1.5rem; background: rgba(59, 130, 246, 0.2); border: 1px solid rgba(59, 130, 246, 0.4); border-radius: 8px; color: #60a5fa; text-decoration: none; cursor: pointer;">📄 Ver PDF</a>
+                  <a href="${baseUrl}archivos/Formamos-lideres-transformacion-digital-IA.pdf" style="display: inline-block; padding: 0.75rem 1.5rem; background: rgba(59, 130, 246, 0.2); border: 1px solid rgba(59, 130, 246, 0.4); border-radius: 8px; color: #60a5fa; text-decoration: none; cursor: pointer;">📄 Ver PDF</a>
                 </div>
               </div>
             </div>
