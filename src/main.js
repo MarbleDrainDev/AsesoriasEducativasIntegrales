@@ -3,6 +3,13 @@ import './style.css'
 const app = document.querySelector('#app')
 const baseUrl = import.meta.env.BASE_URL
 
+const resolveUrl = (url) => {
+  if (!url) return url
+  if (/^(https?:|mailto:|tel:|data:|#)/i.test(url)) return url
+  if (url.startsWith('/')) return `${baseUrl}${url.slice(1)}`
+  return `${baseUrl}${url}`
+}
+
 const markdownToHtml = (md) => {
   if (!md) return ''
   const lines = md.split('\n')
@@ -25,14 +32,21 @@ const markdownToHtml = (md) => {
     if (line.startsWith('<') && line.endsWith('>')) {
       if (inList) { html += '</ul>'; inList = false }
       if (inQuote) { html += '</blockquote>'; inQuote = false }
-      html += replaceEmojis(line)
+      const withUrls = line.replace(/\b(src|href)=("|')([^"']+)(\2)/g, (match, attr, quote, url) => (
+        `${attr}=${quote}${resolveUrl(url)}${quote}`
+      ))
+      html += replaceEmojis(withUrls)
       continue
     }
     if (line.startsWith('>')) {
       if (!inQuote) { html += '<blockquote>'; inQuote = true }
       const quoteLine = replaceEmojis(line.replace(/^>\s?/, ''))
-      const withImages = quoteLine.replace(/!\[(.*?)\]\((.*?)\)/g, '<img src="$2" alt="$1" loading="lazy" />')
-      const linked = withImages.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2">$1</a>')
+      const withImages = quoteLine.replace(/!\[(.*?)\]\((.*?)\)/g, (match, alt, url) => (
+        `<img src="${resolveUrl(url)}" alt="${alt}" loading="lazy" />`
+      ))
+      const linked = withImages.replace(/\[(.*?)\]\((.*?)\)/g, (match, text, url) => (
+        `<a href="${resolveUrl(url)}">${text}</a>`
+      ))
       const styled = linked.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\*(.*?)\*/g, '<em>$1</em>')
       html += `<p>${styled}</p>`
       continue
@@ -45,8 +59,12 @@ const markdownToHtml = (md) => {
       html += `<li>${line.slice(2)}</li>`
       continue
     }
-    const withImages = replaceEmojis(line).replace(/!\[(.*?)\]\((.*?)\)/g, '<img src="$2" alt="$1" loading="lazy" />')
-    const linked = withImages.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2">$1</a>')
+    const withImages = replaceEmojis(line).replace(/!\[(.*?)\]\((.*?)\)/g, (match, alt, url) => (
+      `<img src="${resolveUrl(url)}" alt="${alt}" loading="lazy" />`
+    ))
+    const linked = withImages.replace(/\[(.*?)\]\((.*?)\)/g, (match, text, url) => (
+      `<a href="${resolveUrl(url)}">${text}</a>`
+    ))
     const styled = linked.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\*(.*?)\*/g, '<em>$1</em>')
     html += `<p>${styled}</p>`
   }
@@ -220,8 +238,13 @@ const renderApp = async () => {
 
         <section id="ejemplos" class="section">
           <div class="section-header">
-            <h2>Ejemplos de Markdown</h2>
-            <p>Aprende cómo usar el sistema de Markdown con ejemplos interactivos.</p>
+            <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 1rem; flex-wrap: wrap;">
+              <div>
+                <h2>Ejemplos de Markdown</h2>
+                <p>Aprende cómo usar el sistema de Markdown con ejemplos interactivos.</p>
+              </div>
+              <a class="primary-button" href="https://github.com/MarbleDrainDev/AsesoriasEducativasIntegrales/tree/main/src/sections" target="_blank" rel="noopener noreferrer">Editar contenidos</a>
+            </div>
           </div>
           <div class="examples-grid">
             <div class="example-item">
