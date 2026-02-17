@@ -3,9 +3,31 @@ import './style.css'
 const app = document.querySelector('#app')
 const baseUrl = import.meta.env.BASE_URL
 
+const convertYoutubeUrl = (url) => {
+  if (!url) return url
+  // Detecta youtube.com/watch?v=... y lo convierte a embed
+  const watchMatch = url.match(/youtube\.com\/watch\?v=([a-zA-Z0-9_-]+)/)
+  if (watchMatch) {
+    const videoId = watchMatch[1]
+    // Extrae la lista si existe
+    const listMatch = url.match(/[&?]list=([a-zA-Z0-9_-]+)/)
+    const listParam = listMatch ? `?list=${listMatch[1]}` : ''
+    return `https://www.youtube.com/embed/${videoId}${listParam}`
+  }
+  // Detecta youtu.be/... y lo convierte a embed
+  const shortMatch = url.match(/youtu\.be\/([a-zA-Z0-9_-]+)/)
+  if (shortMatch) {
+    const videoId = shortMatch[1]
+    const listMatch = url.match(/[&?]list=([a-zA-Z0-9_-]+)/)
+    const listParam = listMatch ? `?list=${listMatch[1]}` : ''
+    return `https://www.youtube.com/embed/${videoId}${listParam}`
+  }
+  return url
+}
+
 const resolveUrl = (url) => {
   if (!url) return url
-  if (/^(https?:|mailto:|tel:|data:|#)/i.test(url)) return url
+  if (/^(https?:|mailto:|tel:|data:|#)/i.test(url)) return convertYoutubeUrl(url)
   if (url.startsWith('/')) return `${baseUrl}${url.slice(1)}`
   return `${baseUrl}${url}`
 }
