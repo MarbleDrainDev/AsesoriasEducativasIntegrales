@@ -544,7 +544,7 @@ width="100%" height="500" type="application/pdf"/&gt;</code></pre>
 
       </main>
       <footer class="footer">
-        <p>© 2026 EjemploWb. Todos los derechos reservados.</p>
+        <p>© 2026 Asesorias Educativas Integrales. Todos los derechos reservados.</p>
       </footer>
     </div>
   `
