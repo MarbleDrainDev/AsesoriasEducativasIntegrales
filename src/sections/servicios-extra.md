@@ -5,3 +5,8 @@
 - Seguimiento mensual de resultados
 
 Para más detalles, contáctanos y preparamos un plan a medida.
+
+
+<a href="/archivos/documento.pdf" download>
+  📥 Descargar PDF
+</a>

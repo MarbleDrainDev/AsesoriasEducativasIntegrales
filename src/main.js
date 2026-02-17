@@ -117,7 +117,8 @@ const renderApp = async () => {
               <button class="side-link" type="button" data-target="servicios">Planes</button>
               <button class="side-link" type="button" data-target="proyectos">Casos</button>
               <button class="side-link" type="button" data-target="contacto">Contacto rápido</button>
-              <button class="side-link" type="button" data-target="materias">Materias</button>
+              <button class="side-link" type="button" data-target="contabilidad">Contabilidad</button>
+              <button class="side-link" type="button" data-target="emprendimiento">Emprendimiento</button>
               <button class="side-link" type="button" data-target="ejemplos">Ejemplos Markdown</button>
             </div>
           </div>
@@ -200,29 +201,20 @@ const renderApp = async () => {
           </div>
         </section>
 
-        <section id="materias" class="section">
+        <section id="contabilidad" class="section">
           <div class="section-header">
-            <h2>Materias</h2>
-            <p>Contenido y materiales para cada materia.</p>
-          </div>
-          <div class="stacked-section">
-            <h3>Contabilidad</h3>
+            <h2>Contabilidad</h2>
             <p>Fundamentos, registros, estados financieros y análisis básico.</p>
-            <div class="pill-list">
-              <article class="pill"><h4>Material didáctico</h4><p>Guías, apuntes y resúmenes por unidad.</p></article>
-              <article class="pill"><h4>Tareas</h4><p>Ejercicios prácticos con rúbricas y fechas.</p></article>
-              <article class="pill"><h4>Recursos</h4><p>Plantillas de control, formatos y ejemplos.</p></article>
-            </div>
           </div>
-          <div class="stacked-section">
-            <h3>Emprendimiento</h3>
+          <div class="editable-md" data-md-src="Contabilidad"></div>
+        </section>
+
+        <section id="emprendimiento" class="section">
+          <div class="section-header">
+            <h2>Emprendimiento</h2>
             <p>Validación de ideas, propuesta de valor y modelo de negocio.</p>
-            <div class="pill-list">
-              <article class="pill"><h4>Material didáctico</h4><p>Lecturas, videos y fichas de trabajo.</p></article>
-              <article class="pill"><h4>Tareas</h4><p>Actividades por módulos y entregables.</p></article>
-              <article class="pill"><h4>Recursos</h4><p>Checklist, plantillas y casos guiados.</p></article>
-            </div>
           </div>
+          <div class="editable-md" data-md-src="Emprendimiento"></div>
         </section>
 
         <section id="ejemplos" class="section">
