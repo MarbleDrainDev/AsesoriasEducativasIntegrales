@@ -287,6 +287,123 @@ a {
   color: #f8fafc;
 }
 
+/* Optional styling for markdown placeholders */
+.editable-md {
+  margin-top: 1.5rem;
+  padding: 1.5rem;
+  border-radius: 16px;
+  background: rgba(30, 41, 59, 0.25);
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.18);
+}
+
+.editable-md h1,
+.editable-md h2,
+.editable-md h3 {
+  margin-top: 0.75rem;
+  color: #f1f5f9;
+}
+
+.editable-md p {
+  color: rgba(226, 232, 240, 0.92);
+}
+
+.editable-md ul {
+  padding-left: 1.25rem;
+}
+
+.editable-md img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 1rem auto;
+  border-radius: 12px;
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.25);
+}
+
+.editable-md img:not([width]) {
+  width: min(100%, 760px);
+}
+
+.editable-md iframe,
+.editable-md video {
+  display: block;
+  max-width: 100%;
+  margin: 1rem auto;
+}
+
+/* Media layout helpers for markdown */
+.md-media {
+  display: flex;
+  gap: 1.25rem;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.md-media .md-media-image {
+  flex: 0 0 auto;
+}
+
+.md-media .md-media-text {
+  flex: 1 1 260px;
+  min-width: 220px;
+}
+
+.md-float-left,
+.md-float-right {
+  display: inline-block;
+  vertical-align: top;
+  margin: 0.5rem 1rem 0.75rem 0;
+  max-width: 50%;
+}
+
+.md-float-right {
+  margin: 0.5rem 0 0.75rem 1rem;
+}
+
+@media (max-width: 800px) {
+  .md-float-left,
+  .md-float-right {
+    display: block;
+    max-width: 100%;
+    margin: 0.75rem auto;
+  }
+}
+
+.editable-md blockquote {
+  margin: 1rem 0;
+  padding: 0.85rem 1rem;
+  border-left: 4px solid rgba(124, 58, 237, 0.9);
+  background: rgba(124, 58, 237, 0.08);
+  border-radius: 12px;
+  color: rgba(226, 232, 240, 0.95);
+}
+
+.editable-md blockquote p {
+  margin: 0.3rem 0;
+}
+
+.md-columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+  margin: 1rem 0;
+}
+
+.md-columns > div {
+  padding: 1rem;
+  border-radius: 12px;
+  background: rgba(15, 23, 42, 0.25);
+  border: 1px solid rgba(148, 163, 184, 0.25);
+}
+
+@media (max-width: 800px) {
+  .md-columns {
+    grid-template-columns: 1fr;
+  }
+}
+
 .section-inicio-fixed {
   padding: 3rem;
   border: none;
@@ -601,6 +718,20 @@ a {
   color: #e2e8f0;
 }
 
+/* Editable markdown block appended to sections */
+.editable-md {
+  margin-top: 1.25rem;
+  padding: 1rem;
+  border-radius: 8px;
+  background: linear-gradient(180deg, #0f172a, #0f172a00);
+  border: 1px solid rgba(255,255,255,0.03);
+  box-shadow: 0 8px 20px rgba(2,6,23,0.35);
+}
+.editable-md h1, .editable-md h2, .editable-md h3 { margin: 0.25rem 0 }
+.editable-md ul { margin: 0.5rem 0 0.5rem 1.25rem }
+.editable-md p { margin: 0.5rem 0 }
+.editable-md a { color: #93c5fd }
+
 .card h3 {
   margin-top: 0;
   color: #93c5fd;
@@ -717,6 +848,176 @@ a {
   padding: 2rem 6vw;
   text-align: center;
   color: #94a3b8;
+}
+
+/* Ejemplos de Markdown */
+.examples-grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.example-item {
+  background: rgba(30, 41, 59, 0.4);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 12px;
+  padding: 1.5rem;
+  overflow: hidden;
+}
+
+.example-item h4 {
+  margin: 0 0 1rem 0;
+  color: #60a5fa;
+  font-size: 1.1rem;
+}
+
+.example-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  align-items: stretch;
+}
+
+.example-code {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.example-code pre {
+  margin: 0;
+  padding: 1rem;
+  background: #0f172a;
+  border: 1px solid rgba(59, 130, 246, 0.15);
+  border-radius: 8px;
+  overflow-x: auto;
+  flex-grow: 1;
+}
+
+.example-code code {
+  font-family: 'Courier New', monospace;
+  font-size: 0.875rem;
+  color: #cbd5e1;
+  line-height: 1.6;
+}
+
+.copy-btn {
+  padding: 0.5rem 1rem;
+  background: rgba(59, 130, 246, 0.2);
+  border: 1px solid rgba(59, 130, 246, 0.4);
+  border-radius: 8px;
+  color: #60a5fa;
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.copy-btn:hover {
+  background: rgba(59, 130, 246, 0.3);
+  border-color: rgba(59, 130, 246, 0.6);
+  color: #93c5fd;
+}
+
+.copy-btn:active {
+  transform: scale(0.95);
+}
+
+.example-preview {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: rgba(15, 23, 42, 0.5);
+  border: 1px solid rgba(59, 130, 246, 0.15);
+  border-radius: 8px;
+  padding: 1.5rem;
+  min-height: 200px;
+}
+
+.example-preview h1 {
+  margin: 0.5rem 0;
+  font-size: 1.75rem;
+}
+
+.example-preview h2 {
+  margin: 0.5rem 0;
+  font-size: 1.5rem;
+}
+
+.example-preview h3 {
+  margin: 0.5rem 0;
+  font-size: 1.25rem;
+}
+
+.example-preview p {
+  margin: 0.5rem 0;
+}
+
+.example-preview ul {
+  margin: 0.5rem 0;
+  padding-left: 1.5rem;
+}
+
+.example-preview li {
+  margin: 0.25rem 0;
+}
+
+.example-preview a {
+  color: #60a5fa;
+  text-decoration: underline;
+}
+
+.example-preview a:hover {
+  color: #93c5fd;
+}
+
+.example-preview img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+  margin: 0.5rem 0;
+}
+
+.example-preview blockquote {
+  margin: 0.5rem 0;
+  padding: 0.75rem 1rem;
+  border-left: 4px solid #a855f7;
+  background: rgba(168, 85, 247, 0.1);
+  border-radius: 4px;
+}
+
+.example-preview .md-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  width: 100%;
+}
+
+.example-preview .md-columns > div {
+  min-width: 0;
+  overflow: hidden;
+  word-wrap: break-word;
+}
+
+.example-preview .md-columns > div p {
+  margin: 0.25rem 0;
+  word-break: break-word;
+}
+
+.example-preview iframe,
+.example-preview video {
+  max-width: 100%;
+  height: auto;
+}
+
+@media (max-width: 900px) {
+  .examples-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .example-container {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 900px) {

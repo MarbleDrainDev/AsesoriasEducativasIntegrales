@@ -1,651 +1,107 @@
 import './style.css'
-import { marked } from 'marked'
-
-const DEFAULT_CONTENT = {
-  site: {
-    title: 'Ejemplo de Página Web',
-    tagline: 'Plantilla estática con contenido editable y arquitectura decoupled.',
-    brand: 'EjemploWb',
-    ctaText: 'Hablar con ventas',
-    ctaLink: '#contacto'
-  },
-  menu: [
-    { id: 'inicio', label: 'Inicio' },
-    { id: 'nosotros', label: 'Nosotros' },
-    { id: 'servicios', label: 'Servicios' },
-    { id: 'proyectos', label: 'Proyectos' },
-    { id: 'contacto', label: 'Contacto' }
-  ],
-  sideMenu: {
-    title: 'Menú rápido',
-    items: [
-      { id: 'atajo-inicio', label: 'Resumen', target: 'inicio' },
-      { id: 'atajo-nosotros', label: 'Equipo', target: 'nosotros' },
-      { id: 'atajo-servicios', label: 'Planes', target: 'servicios' },
-      { id: 'atajo-proyectos', label: 'Casos', target: 'proyectos' },
-      { id: 'atajo-contacto', label: 'Contacto rápido', target: 'contacto' },
-      { id: 'atajo-teclados', label: 'Teclados mecánicos', target: 'teclados' }
-    ]
-  },
-  sections: {
-    inicio: {
-      title: 'Todo lo que necesitas para empezar rápido',
-      subtitle: 'Cambia textos e instrucciones sin tocar el código.',
-      body: 'Esta sección presenta el objetivo principal del sitio. Puedes reemplazar estos párrafos por el mensaje real de tu negocio.',
-      blocks: [
-        { type: 'text', value: 'Este bloque es totalmente libre. Puedes escribir lo que quieras aquí.' },
-        { type: 'image', src: '/vite.svg', alt: 'Imagen ejemplo', caption: 'Puedes cambiar esta imagen por la tuya.' },
-        { type: 'highlights', items: ['Sitio 100% estático', 'Contenido editable', 'Diseño responsive'] },
-        { type: 'cta', text: 'Ver servicios', link: '#servicios' }
-      ],
-      highlights: ['Sitio 100% estático', 'Contenido editable', 'Diseño responsive'],
-      cta: {
-        text: 'Ver servicios',
-        link: '#servicios'
-      }
-    },
-    nosotros: {
-      title: 'Un equipo enfocado en resultados',
-      body: 'Describe aquí la historia, misión y visión. Mantén frases cortas y claras para que sea fácil de actualizar.',
-      blocks: [
-        { type: 'text', value: 'Este bloque cuenta quiénes son y por qué existen.' },
-        {
-          type: 'values',
-          items: [
-            { title: 'Transparencia', text: 'Comunicación clara y honesta en cada etapa.' },
-            { title: 'Calidad', text: 'Procesos consistentes para mantener un alto estándar.' },
-            { title: 'Cercanía', text: 'Acompañamiento continuo para tus clientes.' }
-          ]
-        }
-      ],
-      values: [
-        { title: 'Transparencia', text: 'Comunicación clara y honesta en cada etapa.' },
-        { title: 'Calidad', text: 'Procesos consistentes para mantener un alto estándar.' },
-        { title: 'Cercanía', text: 'Acompañamiento continuo para tus clientes.' }
-      ]
-    },
-    servicios: {
-      title: 'Servicios principales',
-      body: 'Enumera los servicios que ofreces. Cada tarjeta es editable desde el archivo de contenido.',
-      blocks: [
-        { type: 'text', value: 'Enumera los servicios clave con una breve descripción.' },
-        {
-          type: 'cards',
-          items: [
-            { title: 'Estrategia', text: 'Definimos objetivos, cronograma y métricas.' },
-            { title: 'Diseño', text: 'Creamos propuestas visuales modernas y claras.' },
-            { title: 'Soporte', text: 'Te acompañamos después del lanzamiento.' }
-          ]
-        }
-      ],
-      cards: [
-        { title: 'Estrategia', text: 'Definimos objetivos, cronograma y métricas.' },
-        { title: 'Diseño', text: 'Creamos propuestas visuales modernas y claras.' },
-        { title: 'Soporte', text: 'Te acompañamos después del lanzamiento.' }
-      ]
-    },
-    proyectos: {
-      title: 'Casos y proyectos',
-      body: 'Muestra resultados o referencias. Puedes cambiar títulos y descripciones sin tocar el código.',
-      blocks: [
-        { type: 'text', value: 'Muestra proyectos destacados y resultados visibles.' },
-        {
-          type: 'items',
-          items: [
-            { title: 'Proyecto Alfa', text: 'Aumento de conversiones en 30%.' },
-            { title: 'Proyecto Beta', text: 'Rediseño completo en 4 semanas.' },
-            { title: 'Proyecto Gamma', text: 'Lanzamiento rápido con métricas claras.' }
-          ]
-        }
-      ],
-      items: [
-        { title: 'Proyecto Alfa', text: 'Aumento de conversiones en 30%.' },
-        { title: 'Proyecto Beta', text: 'Rediseño completo en 4 semanas.' },
-        { title: 'Proyecto Gamma', text: 'Lanzamiento rápido con métricas claras.' }
-      ]
-    },
-    contacto: {
-      title: 'Hablemos de tu idea',
-      body: 'Incluye aquí la información básica de contacto y un llamado a la acción.',
-      blocks: [
-        { type: 'text', value: 'Comparte los datos clave para contactarte.' },
-        {
-          type: 'contacts',
-          items: [
-            { label: 'Correo', value: 'hola@tudominio.com' },
-            { label: 'Teléfono', value: '+34 600 000 000' },
-            { label: 'Ubicación', value: 'Madrid, ES' }
-          ]
-        },
-        { type: 'cta', text: 'Escribir correo', link: 'mailto:hola@tudominio.com' }
-      ],
-      contacts: [
-        { label: 'Correo', value: 'hola@tudominio.com' },
-        { label: 'Teléfono', value: '+34 600 000 000' },
-        { label: 'Ubicación', value: 'Madrid, ES' }
-      ],
-      buttonText: 'Escribir correo',
-      buttonLink: 'mailto:hola@tudominio.com'
-    },
-    teclados: {
-      title: 'Teclados mecánicos',
-      subtitle: 'Sensación, precisión y personalización.',
-      body: 'Explica aquí los beneficios: switches, retroiluminación, materiales y tipos de uso (gaming, escritura, trabajo).',
-      blocks: [
-        { type: 'text', value: 'Aquí puedes contar por qué los teclados mecánicos son especiales.' },
-        { type: 'highlights', items: ['Switches lineales o táctiles', 'Keycaps personalizables', 'Durabilidad superior'] },
-        {
-          type: 'cards',
-          items: [
-            { title: 'Switches', text: 'Lineales, táctiles o clicky según tu preferencia.' },
-            { title: 'Diseño', text: 'Layout compacto o completo según tu espacio.' },
-            { title: 'Experiencia', text: 'Escritura cómoda y respuesta inmediata.' }
-          ]
-        }
-      ],
-      highlights: ['Switches lineales o táctiles', 'Keycaps personalizables', 'Durabilidad superior'],
-      cards: [
-        { title: 'Switches', text: 'Lineales, táctiles o clicky según tu preferencia.' },
-        { title: 'Diseño', text: 'Layout compacto o completo según tu espacio.' },
-        { title: 'Experiencia', text: 'Escritura cómoda y respuesta inmediata.' }
-      ]
-    }
-  },
-  footer: {
-    text: '© 2026 EjemploWb. Todos los derechos reservados.'
-  },
-  instructions: {
-    note: 'Edita este contenido en public/content.json o public/content.csv.'
-  }
-}
 
 const app = document.querySelector('#app')
 
-const parseCsv = (text) => {
-  const rows = []
-  let current = ''
-  let inQuotes = false
-  let row = []
-  for (let i = 0; i < text.length; i += 1) {
-    const char = text[i]
-    const next = text[i + 1]
-    if (char === '"') {
-      if (inQuotes && next === '"') {
-        current += '"'
-        i += 1
-      } else {
-        inQuotes = !inQuotes
-      }
-    } else if (char === ',' && !inQuotes) {
-      row.push(current)
-      current = ''
-    } else if ((char === '\n' || char === '\r') && !inQuotes) {
-      if (current.length || row.length) {
-        row.push(current)
-        rows.push(row)
-        row = []
-        current = ''
-      }
-    } else {
-      current += char
+const markdownToHtml = (md) => {
+  if (!md) return ''
+  const lines = md.split('\n')
+  let html = ''
+  let inList = false
+  let inQuote = false
+  const replaceEmojis = (text) => (
+    text
+      .replace(/:warning:/g, '⚠️')
+      .replace(/:memo:/g, '📝')
+      .replace(/:bulb:/g, '💡')
+  )
+  for (const raw of lines) {
+    const line = raw.trim()
+    if (!line) {
+      if (inList) { html += '</ul>'; inList = false }
+      if (inQuote) { html += '</blockquote>'; inQuote = false }
+      continue
     }
-  }
-  if (current.length || row.length) {
-    row.push(current)
-    rows.push(row)
-  }
-  return rows
-}
-
-const csvToContent = (csvText) => {
-  const rows = parseCsv(csvText).filter((row) => row.length >= 4)
-  const data = {
-    site: {},
-    menu: [],
-    sideMenu: { title: '', items: [] },
-    sections: {},
-    footer: {},
-    instructions: {}
-  }
-  rows.slice(1).forEach(([type, section, field, value]) => {
-    if (!type) return
-    const cleanedValue = value?.trim() ?? ''
-    switch (type.trim()) {
-      case 'site':
-        data.site[field.trim()] = cleanedValue
-        break
-      case 'menu':
-        data.menu.push({ id: section.trim(), label: cleanedValue })
-        break
-      case 'sidemenu':
-        data.sideMenu.title = cleanedValue
-        break
-      case 'sideitem':
-        data.sideMenu.items.push({
-          id: section.trim(),
-          label: field.trim(),
-          target: cleanedValue || section.trim()
-        })
-        break
-      case 'section': {
-        const key = section.trim()
-        data.sections[key] = data.sections[key] || {}
-        if (cleanedValue.includes('|')) {
-          data.sections[key][field.trim()] = cleanedValue.split('|').map((item) => item.trim())
-        } else {
-          data.sections[key][field.trim()] = cleanedValue
-        }
-        break
-      }
-      case 'highlight': {
-        const key = section.trim()
-        data.sections[key] = data.sections[key] || {}
-        data.sections[key].highlights = data.sections[key].highlights || []
-        data.sections[key].highlights.push(cleanedValue)
-        break
-      }
-      case 'card': {
-        const key = section.trim()
-        data.sections[key] = data.sections[key] || {}
-        data.sections[key].cards = data.sections[key].cards || []
-        data.sections[key].cards.push({ title: field.trim(), text: cleanedValue })
-        break
-      }
-      case 'value': {
-        const key = section.trim()
-        data.sections[key] = data.sections[key] || {}
-        data.sections[key].values = data.sections[key].values || []
-        data.sections[key].values.push({ title: field.trim(), text: cleanedValue })
-        break
-      }
-      case 'item': {
-        const key = section.trim()
-        data.sections[key] = data.sections[key] || {}
-        data.sections[key].items = data.sections[key].items || []
-        data.sections[key].items.push({ title: field.trim(), text: cleanedValue })
-        break
-      }
-      case 'contact': {
-        const key = section.trim()
-        data.sections[key] = data.sections[key] || {}
-        data.sections[key].contacts = data.sections[key].contacts || []
-        data.sections[key].contacts.push({ label: field.trim(), value: cleanedValue })
-        break
-      }
-      case 'footer':
-        data.footer[field.trim()] = cleanedValue
-        break
-      case 'instruction':
-        data.instructions[field.trim()] = cleanedValue
-        break
-      default:
-        break
+    if (line.startsWith('<') && line.endsWith('>')) {
+      if (inList) { html += '</ul>'; inList = false }
+      if (inQuote) { html += '</blockquote>'; inQuote = false }
+      html += replaceEmojis(line)
+      continue
     }
-  })
-  return data
-}
-
-/**
- * Carga el contenido desde una fuente externa o retorna contenido por defecto.
- * 
- * @async
- * @function loadContent
- * @returns {Promise<Object>} Objeto con el contenido cargado. Si el modo es 'md',
- *                            incluye la propiedad __source establecida a 'md'.
- *                            En caso de error, retorna DEFAULT_CONTENT.
- * 
- * @description
- * Esta función:
- * 1. Lee el parámetro de URL 'source' para determinar el modo de carga
- * 2. Si source='md', establece el modo a 'md', de lo contrario usa 'json'
- * 3. Intenta obtener el archivo 'content.json' del servidor
- * 4. Si la respuesta es exitosa, parsea el JSON y lo retorna
- * 5. Si el modo es 'md', añade la propiedad __source al objeto
- * 6. Si hay error en la carga, retorna DEFAULT_CONTENT como fallback
- */
-const loadContent = async () => {
-  const params = new URLSearchParams(window.location.search)
-  const sourceParam = params.get('source')
-  const mode = sourceParam === 'md' ? 'md' : 'json'
-  try {
-    const response = await fetch('/content.json')
-    if (!response.ok) throw new Error('JSON no disponible')
-    const data = await response.json()
-    return mode === 'md' ? { ...data, __source: 'md' } : data
-  } catch (error) {
-    console.warn('Usando contenido por defecto.', error)
-    return DEFAULT_CONTENT
-  }
-}
-
-const renderBlocks = (blocks) => {
-  const container = document.createElement('div')
-  container.className = 'block-list'
-
-  blocks.forEach((block) => {
-    if (!block || !block.type) return
-    const wrapper = document.createElement('div')
-    wrapper.className = `block block-${block.type}`
-
-    switch (block.type) {
-      case 'text':
-        wrapper.innerHTML = `<p>${block.value ?? ''}</p>`
-        break
-      case 'image':
-        wrapper.innerHTML = `
-          <img src="${block.src ?? ''}" alt="${block.alt ?? ''}" loading="lazy" />
-          ${block.caption ? `<p class="block-caption">${block.caption}</p>` : ''}
-        `
-        break
-      case 'highlights':
-        wrapper.innerHTML = `
-          <ul class="highlight-list">
-            ${(block.items ?? []).map((item) => `<li>${item}</li>`).join('')}
-          </ul>
-        `
-        break
-      case 'cards':
-        wrapper.innerHTML = `
-          <div class="card-grid">
-            ${(block.items ?? [])
-              .map((item) => `<article class="card"><h3>${item.title}</h3><p>${item.text}</p></article>`)
-              .join('')}
-          </div>
-        `
-        break
-      case 'values':
-        wrapper.innerHTML = `
-          <div class="card-grid">
-            ${(block.items ?? [])
-              .map((item) => `<article class="card"><h3>${item.title}</h3><p>${item.text}</p></article>`)
-              .join('')}
-          </div>
-        `
-        break
-      case 'items':
-        wrapper.innerHTML = `
-          <div class="pill-list">
-            ${(block.items ?? [])
-              .map((item) => `<article class="pill"><h3>${item.title}</h3><p>${item.text}</p></article>`)
-              .join('')}
-          </div>
-        `
-        break
-      case 'contacts':
-        wrapper.innerHTML = `
-          <div class="contact-list">
-            ${(block.items ?? [])
-              .map((item) => `<div><strong>${item.label}:</strong> ${item.value}</div>`)
-              .join('')}
-          </div>
-        `
-        break
-      case 'cta':
-        wrapper.innerHTML = `
-          <a class="primary-button" href="${block.link ?? '#'}">${block.text ?? ''}</a>
-        `
-        break
-      default:
-        break
+    if (line.startsWith('>')) {
+      if (!inQuote) { html += '<blockquote>'; inQuote = true }
+      const quoteLine = replaceEmojis(line.replace(/^>\s?/, ''))
+      const withImages = quoteLine.replace(/!\[(.*?)\]\((.*?)\)/g, '<img src="$2" alt="$1" loading="lazy" />')
+      const linked = withImages.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2">$1</a>')
+      const styled = linked.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\*(.*?)\*/g, '<em>$1</em>')
+      html += `<p>${styled}</p>`
+      continue
     }
-
-    container.appendChild(wrapper)
-  })
-
-  return container
+    if (line.startsWith('### ')) { html += `<h3>${line.slice(4)}</h3>`; continue }
+    if (line.startsWith('## ')) { html += `<h2>${line.slice(3)}</h2>`; continue }
+    if (line.startsWith('# ')) { html += `<h1>${line.slice(2)}</h1>`; continue }
+    if (line.startsWith('- ')) {
+      if (!inList) { inList = true; html += '<ul>' }
+      html += `<li>${line.slice(2)}</li>`
+      continue
+    }
+    const withImages = replaceEmojis(line).replace(/!\[(.*?)\]\((.*?)\)/g, '<img src="$2" alt="$1" loading="lazy" />')
+    const linked = withImages.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2">$1</a>')
+    const styled = linked.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\*(.*?)\*/g, '<em>$1</em>')
+    html += `<p>${styled}</p>`
+  }
+  if (inList) html += '</ul>'
+  return html
 }
 
-const renderInicioFixed = (section) => {
-  section.classList.add('section-inicio-fixed')
-  section.innerHTML = `
-    <div class="hero">
-      <div class="hero-content">
-        <div class="hero-badge">🎓 Asesoría Educativa Integral</div>
-        <h1>Impulsa el aprendizaje con recursos claros y prácticos</h1>
-        <p class="hero-description">
-          Un espacio pensado para acompañar a estudiantes con guías, cronogramas y materiales
-          que facilitan el trabajo académico en Contabilidad y Emprendimiento.
-        </p>
-        <div class="hero-actions">
-          <a class="primary-button" href="#servicios">Explorar servicios</a>
-          <a class="ghost-button" href="#contacto">Hablar con asesor</a>
-        </div>
-        <div class="hero-features">
-          <div class="feature">
-            <div class="feature-icon">📚</div>
-            <div class="feature-text">
-              <h4>+150 Recursos</h4>
-              <p>Materiales descargables</p>
-            </div>
-          </div>
-          <div class="feature">
-            <div class="feature-icon">⏰</div>
-            <div class="feature-text">
-              <h4>Acceso 24/7</h4>
-              <p>Disponible siempre</p>
-            </div>
-          </div>
-          <div class="feature">
-            <div class="feature-icon">✅</div>
-            <div class="feature-text">
-              <h4>100% Actualizado</h4>
-              <p>Contenido fresco</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="hero-aside">
-        <div class="hero-card-main">
-          <div class="card-header">
-            <h3>¿Qué encontrarás?</h3>
-          </div>
-          <ul class="card-list">
-            <li><span class="checkmark">✓</span> Guías y materiales descargables</li>
-            <li><span class="checkmark">✓</span> Normas APA y buenas prácticas</li>
-            <li><span class="checkmark">✓</span> Test vocacional interactivo</li>
-            <li><span class="checkmark">✓</span> Cronograma de actividades</li>
-            <li><span class="checkmark">✓</span> Recomendaciones personalizadas</li>
-          </ul>
-        </div>
-        <div class="hero-cta-box">
-          <p class="cta-text">¿Listo para comenzar?</p>
-          <a href="#contacto" class="cta-link">Agenda una llamada →</a>
-        </div>
-      </div>
-    </div>
-  `
-}
+const mdModules = import.meta.glob('./sections/*.md', { query: '?raw', import: 'default' })
 
-const renderProfileSection = (section, content) => {
-  section.classList.add('profile-section')
-  const imgSrc = content.image?.src ?? '/vite.svg'
-  section.innerHTML = `
-    <div class="profile-grid">
-      <aside class="profile-aside">
-        <div class="avatar"><img src="${imgSrc}" alt="${content.image?.alt ?? ''}" loading="lazy"/></div>
-        <h3 class="profile-name">${content.title ?? ''}</h3>
-        ${content.subtitle ? `<p class="profile-role">${content.subtitle}</p>` : ''}
-        <div class="profile-contacts">
-          ${(content.contacts ?? []).map(c => `<div class="contact-item"><strong>${c.label}:</strong> ${c.value}</div>`).join('')}
-        </div>
-        <a class="primary-button" href="${content.buttonLink ?? '#'}">${content.buttonText ?? 'Contactar'}</a>
-      </aside>
-      <div class="profile-main">
-        ${content.body ? `<p class="profile-summary">${content.body}</p>` : ''}
-        ${content.skills?.length ? `<div class="skills">${content.skills.map(s => `<span class="skill-chip">${s}</span>`).join('')}</div>` : ''}
-        ${content.experience?.length ? `
-          <div class="experience">
-            <h4>Experiencia laboral</h4>
-            <ol class="timeline">
-              ${content.experience.map((e, i) => `
-                <li class="exp-item">
-                  <div class="exp-head">
-                    <div class="exp-title"><strong>${e.role}</strong> — <span class="exp-company">${e.company}</span></div>
-                    <div class="exp-period">${e.period}</div>
-                  </div>
-                  <div class="exp-details">${e.details}</div>
-                </li>
-              `).join('')}
-            </ol>
-          </div>
-        ` : ''}
-        ${content.education?.length ? `
-          <div class="education">
-            <h4>Formación</h4>
-            <ul>
-              ${content.education.map(ed => `<li>${ed.degree} — ${ed.institution}${ed.year ? ` (${ed.year})` : ''}</li>`).join('')}
-            </ul>
-          </div>
-        ` : ''}
-        ${content.certifications?.length ? `
-          <div class="certifications">
-            <h4>Certificaciones</h4>
-            <ul>
-              ${content.certifications.map(c => `<li>${c.name}${c.year ? ` — ${c.year}` : ''}</li>`).join('')}
-            </ul>
-          </div>
-        ` : ''}
-      </div>
-    </div>
-  `
-
-  // Inicialmente ocultar detalles de experiencia y añadir toggles
-  section.querySelectorAll('.exp-item .exp-details').forEach((el) => { el.style.display = 'none' })
-  section.querySelectorAll('.exp-item .exp-head').forEach((head) => {
-    head.style.cursor = 'pointer'
-    head.addEventListener('click', () => {
-      const details = head.nextElementSibling
-      const isHidden = details.style.display === 'none'
-      details.style.display = isHidden ? 'block' : 'none'
-      head.classList.toggle('open', isHidden)
-    })
-  })
-}
-
-const applySectionClasses = (section, content) => {
-  const rawClasses = content?.className ?? ''
-  if (!rawClasses) return
-  rawClasses
-    .split(' ')
-    .map((item) => item.trim())
+const getMdIdsFromModules = () => (
+  Object.keys(mdModules)
+    .map((path) => path.split('/').pop())
+    .map((name) => name.replace(/\.md$/i, ''))
     .filter(Boolean)
-    .forEach((item) => section.classList.add(item))
+)
+
+const getMdContent = async (id) => {
+  const path = `./sections/${id}.md`
+  const loader = mdModules[path]
+  if (!loader) return null
+  const txt = await loader()
+  return txt?.trim() ? txt : null
 }
 
-const createSection = (id, content) => {
+const loadMarkdownPlaceholders = async (root) => {
+  const placeholders = root.querySelectorAll('[data-md-src]')
+  for (const el of placeholders) {
+    const src = el.getAttribute('data-md-src')
+    if (!src) continue
+    const md = await getMdContent(src)
+    if (!md) continue
+    el.innerHTML = markdownToHtml(md)
+  }
+}
+
+const formatMdTitle = (id) => {
+  const cleaned = id.replace(/[-_]+/g, ' ').trim()
+  return cleaned.charAt(0).toUpperCase() + cleaned.slice(1)
+}
+
+const createAutoMdSection = (id) => {
   const section = document.createElement('section')
   section.className = 'section'
   section.id = id
   section.dataset.view = id
-
-  if (id === 'inicio') {
-    renderInicioFixed(section)
-    return section
-  }
-
-  if (id === 'nosotros') {
-    renderProfileSection(section, content)
-    return section
-  }
-
-  applySectionClasses(section, content)
-  const header = document.createElement('div')
-  header.className = 'section-header'
-  header.innerHTML = `
-    <h2>${content.title ?? ''}</h2>
-    ${content.subtitle ? `<p class="section-subtitle">${content.subtitle}</p>` : ''}
-    ${content.body ? `<p>${content.body}</p>` : ''}
+  section.innerHTML = `
+    <div class="section-header">
+      <h2>${formatMdTitle(id)}</h2>
+    </div>
+    <div class="editable-md" data-md-src="${id}"></div>
   `
-
-  section.appendChild(header)
-
-  if (content.blocks?.length) {
-    section.appendChild(renderBlocks(content.blocks))
-    return section
-  }
-
-  if (content.highlights?.length) {
-    const list = document.createElement('ul')
-    list.className = 'highlight-list'
-    list.innerHTML = content.highlights.map((item) => `<li>${item}</li>`).join('')
-    section.appendChild(list)
-  }
-
-  if (content.values?.length) {
-    const grid = document.createElement('div')
-    grid.className = 'card-grid'
-    grid.innerHTML = content.values
-      .map((value) => `<article class="card"><h3>${value.title}</h3><p>${value.text}</p></article>`)
-      .join('')
-    section.appendChild(grid)
-  }
-
-  if (content.cards?.length) {
-    const grid = document.createElement('div')
-    grid.className = 'card-grid'
-    grid.innerHTML = content.cards
-      .map((card) => `<article class="card"><h3>${card.title}</h3><p>${card.text}</p></article>`)
-      .join('')
-    section.appendChild(grid)
-  }
-
-  if (content.items?.length) {
-    const list = document.createElement('div')
-    list.className = 'pill-list'
-    list.innerHTML = content.items
-      .map((item) => `<article class="pill"><h3>${item.title}</h3><p>${item.text}</p></article>`)
-      .join('')
-    section.appendChild(list)
-  }
-
-  if (content.contacts?.length) {
-    const contactList = document.createElement('div')
-    contactList.className = 'contact-list'
-    contactList.innerHTML = content.contacts
-      .map((contact) => `<div><strong>${contact.label}:</strong> ${contact.value}</div>`)
-      .join('')
-    section.appendChild(contactList)
-  }
-
-  if (content.cta) {
-    const cta = document.createElement('a')
-    cta.className = 'primary-button'
-    cta.href = content.cta.link
-    cta.textContent = content.cta.text
-    section.appendChild(cta)
-  }
-
-  if (content.buttonText && content.buttonLink) {
-    const button = document.createElement('a')
-    button.className = 'primary-button'
-    button.href = content.buttonLink
-    button.textContent = content.buttonText
-    section.appendChild(button)
-  }
-
   return section
 }
 
-const loadMarkdownSections = async (sections) => {
-  await Promise.all(
-    sections.map(async (section) => {
-      const targetId = section.dataset.md
-      if (!targetId) return
-      try {
-        const response = await fetch(`/sections/${targetId}.md`)
-        if (!response.ok) throw new Error('Markdown no disponible')
-        const text = await response.text()
-        section.innerHTML = marked.parse(text)
-      } catch (error) {
-        section.innerHTML = '<p>No se pudo cargar el contenido Markdown.</p>'
-        console.warn(error)
-      }
-    })
-  )
-}
-
-const renderApp = (content) => {
-  document.title = content.site?.title ?? 'Ejemplo de Página Web'
+const renderApp = async () => {
+  document.title = 'Ejemplo de Página Web'
   app.innerHTML = `
     <div class="page">
       <header class="header">
@@ -654,97 +110,467 @@ const renderApp = (content) => {
             <span class="drawer-icon"></span>
           </button>
           <div class="drawer">
-            <p class="drawer-title">${content.sideMenu?.title ?? 'Menú rápido'}</p>
-            <div class="side-list"></div>
+            <p class="drawer-title">Menú rápido</p>
+            <div class="side-list">
+              <button class="side-link" type="button" data-target="inicio">Resumen</button>
+              <button class="side-link" type="button" data-target="nosotros">Equipo</button>
+              <button class="side-link" type="button" data-target="servicios">Planes</button>
+              <button class="side-link" type="button" data-target="proyectos">Casos</button>
+              <button class="side-link" type="button" data-target="contacto">Contacto rápido</button>
+              <button class="side-link" type="button" data-target="materias">Materias</button>
+              <button class="side-link" type="button" data-target="ejemplos">Ejemplos Markdown</button>
+            </div>
           </div>
         </div>
         <div class="brand">
-          <img src="/vite.svg" alt="Logo" class="brand-mark">
+          <img src="/assets/vite.svg" alt="Logo" class="brand-mark">
           <div>
-            <p class="brand-title">${content.site?.title ?? ''}</p>
-            <p class="brand-tagline">${content.site?.tagline ?? ''}</p>
+            <p class="brand-title">Ejemplo de Página Web</p>
+            <p class="brand-tagline">Plantilla estática con contenido editable y arquitectura decoupled.</p>
           </div>
         </div>
         <button class="menu-toggle" aria-controls="site-menu" aria-expanded="false">
           Menú
           <span class="menu-icon"></span>
         </button>
-        <nav id="site-menu" class="nav"></nav>
+        <nav id="site-menu" class="nav">
+          <a href="#inicio" data-view="inicio">Inicio</a>
+          <a href="#nosotros" data-view="nosotros">Nosotros</a>
+          <a href="#servicios" data-view="servicios">Servicios</a>
+          <a href="#proyectos" data-view="proyectos">Proyectos</a>
+          <a href="#contacto" data-view="contacto">Contacto</a>
+        </nav>
       </header>
       <main class="main" id="main-content">
+        <section id="inicio" class="section section-inicio-fixed">
+          <div class="hero">
+            <div class="hero-content">
+              <div class="hero-badge">🎓 Asesoría Educativa Integral</div>
+              <h1>Impulsa el aprendizaje con recursos claros y prácticos</h1>
+              <p class="hero-description">
+                Un espacio pensado para acompañar a estudiantes con guías, cronogramas y materiales
+                que facilitan el trabajo académico en Contabilidad y Emprendimiento.
+              </p>
+              <div class="hero-actions">
+                <a class="primary-button" href="#servicios">Explorar servicios</a>
+                <a class="ghost-button" href="#contacto">Hablar con asesor</a>
+              </div>
+              <div class="hero-features">
+                <div class="feature">
+                  <div class="feature-icon">📚</div>
+                  <div class="feature-text">
+                    <h4>+150 Recursos</h4>
+                    <p>Materiales descargables</p>
+                  </div>
+                </div>
+                <div class="feature">
+                  <div class="feature-icon">⏰</div>
+                  <div class="feature-text">
+                    <h4>Acceso 24/7</h4>
+                    <p>Disponible siempre</p>
+                  </div>
+                </div>
+                <div class="feature">
+                  <div class="feature-icon">✅</div>
+                  <div class="feature-text">
+                    <h4>100% Actualizado</h4>
+                    <p>Contenido fresco</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="hero-aside">
+              <div class="hero-card-main">
+                <div class="card-header">
+                  <h3>¿Qué encontrarás?</h3>
+                </div>
+                <ul class="card-list">
+                  <li><span class="checkmark">✓</span> Guías y materiales descargables</li>
+                  <li><span class="checkmark">✓</span> Normas APA y buenas prácticas</li>
+                  <li><span class="checkmark">✓</span> Test vocacional interactivo</li>
+                  <li><span class="checkmark">✓</span> Cronograma de actividades</li>
+                  <li><span class="checkmark">✓</span> Recomendaciones personalizadas</li>
+                </ul>
+              </div>
+              <div class="hero-cta-box">
+                <p class="cta-text">¿Listo para comenzar?</p>
+                <a href="#contacto" class="cta-link">Agenda una llamada →</a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="materias" class="section">
+          <div class="section-header">
+            <h2>Materias</h2>
+            <p>Contenido y materiales para cada materia.</p>
+          </div>
+          <div class="stacked-section">
+            <h3>Contabilidad</h3>
+            <p>Fundamentos, registros, estados financieros y análisis básico.</p>
+            <div class="pill-list">
+              <article class="pill"><h4>Material didáctico</h4><p>Guías, apuntes y resúmenes por unidad.</p></article>
+              <article class="pill"><h4>Tareas</h4><p>Ejercicios prácticos con rúbricas y fechas.</p></article>
+              <article class="pill"><h4>Recursos</h4><p>Plantillas de control, formatos y ejemplos.</p></article>
+            </div>
+          </div>
+          <div class="stacked-section">
+            <h3>Emprendimiento</h3>
+            <p>Validación de ideas, propuesta de valor y modelo de negocio.</p>
+            <div class="pill-list">
+              <article class="pill"><h4>Material didáctico</h4><p>Lecturas, videos y fichas de trabajo.</p></article>
+              <article class="pill"><h4>Tareas</h4><p>Actividades por módulos y entregables.</p></article>
+              <article class="pill"><h4>Recursos</h4><p>Checklist, plantillas y casos guiados.</p></article>
+            </div>
+          </div>
+        </section>
+
+        <section id="ejemplos" class="section">
+          <div class="section-header">
+            <h2>Ejemplos de Markdown</h2>
+            <p>Aprende cómo usar el sistema de Markdown con ejemplos interactivos.</p>
+          </div>
+          <div class="examples-grid">
+            <div class="example-item">
+              <h4>Títulos</h4>
+              <div class="example-container">
+                <div class="example-code">
+                  <pre><code># Título 1
+## Título 2
+### Título 3</code></pre>
+                  <button class="copy-btn" data-code="# Título 1&#10;## Título 2&#10;### Título 3">📋 Copiar</button>
+                </div>
+                <div class="example-preview editable-md">
+                  <h1>Título 1</h1>
+                  <h2>Título 2</h2>
+                  <h3>Título 3</h3>
+                </div>
+              </div>
+            </div>
+
+            <div class="example-item">
+              <h4>Estilos de texto</h4>
+              <div class="example-container">
+                <div class="example-code">
+                  <pre><code>**Texto en negrita**
+*Texto en cursiva*
+***Texto en negrita y cursiva***</code></pre>
+                  <button class="copy-btn" data-code="**Texto en negrita**&#10;*Texto en cursiva*&#10;***Texto en negrita y cursiva***">📋 Copiar</button>
+                </div>
+                <div class="example-preview editable-md">
+                  <p><strong>Texto en negrita</strong></p>
+                  <p><em>Texto en cursiva</em></p>
+                  <p><strong><em>Texto en negrita y cursiva</em></strong></p>
+                </div>
+              </div>
+            </div>
+
+            <div class="example-item">
+              <h4>Listas</h4>
+              <div class="example-container">
+                <div class="example-code">
+                  <pre><code>- Primer elemento
+- Segundo elemento
+- Tercer elemento</code></pre>
+                  <button class="copy-btn" data-code="- Primer elemento&#10;- Segundo elemento&#10;- Tercer elemento">📋 Copiar</button>
+                </div>
+                <div class="example-preview editable-md">
+                  <ul>
+                    <li>Primer elemento</li>
+                    <li>Segundo elemento</li>
+                    <li>Tercer elemento</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="example-item">
+              <h4>Enlaces</h4>
+              <div class="example-container">
+                <div class="example-code">
+                  <pre><code>[Texto del enlace](https://ejemplo.com)
+[Google](https://google.com)</code></pre>
+                  <button class="copy-btn" data-code="[Texto del enlace](https://ejemplo.com)&#10;[Google](https://google.com)">📋 Copiar</button>
+                </div>
+                <div class="example-preview editable-md">
+                  <p><a href="https://ejemplo.com">Texto del enlace</a></p>
+                  <p><a href="https://google.com">Google</a></p>
+                </div>
+              </div>
+            </div>
+
+            <div class="example-item">
+              <h4>Imágenes</h4>
+              <div class="example-container">
+                <div class="example-code">
+                  <pre><code>![Alt texto](/assets/vite.svg)
+![Logo](./image.png width=200)</code></pre>
+                  <button class="copy-btn" data-code="![Alt texto](/assets/vite.svg)&#10;![Logo](./image.png width=200)">📋 Copiar</button>
+                </div>
+                <div class="example-preview editable-md">
+                  <p><img src="/assets/vite.svg" alt="Alt texto" loading="lazy" style="max-width: 150px;"/></p>
+                </div>
+              </div>
+            </div>
+
+            <div class="example-item">
+              <h4>Citas y avisos</h4>
+              <div class="example-container">
+                <div class="example-code">
+                  <pre><code>> ⚠️ Esto es una advertencia
+> 📝 Esto es una nota
+> 💡 Esto es una idea</code></pre>
+                  <button class="copy-btn" data-code="> ⚠️ Esto es una advertencia&#10;> 📝 Esto es una nota&#10;> 💡 Esto es una idea">📋 Copiar</button>
+                </div>
+                <div class="example-preview editable-md">
+                  <blockquote>
+                    <p>⚠️ Esto es una advertencia</p>
+                  </blockquote>
+                  <blockquote>
+                    <p>📝 Esto es una nota</p>
+                  </blockquote>
+                  <blockquote>
+                    <p>💡 Esto es una idea</p>
+                  </blockquote>
+                </div>
+              </div>
+            </div>
+
+            <div class="example-item">
+              <h4>Emoji shortcodes</h4>
+              <div class="example-container">
+                <div class="example-code">
+                  <pre><code>:warning: Advertencia
+:memo: Nota importante
+:bulb: Idea brillante</code></pre>
+                  <button class="copy-btn" data-code=":warning: Advertencia&#10;:memo: Nota importante&#10;:bulb: Idea brillante">📋 Copiar</button>
+                </div>
+                <div class="example-preview editable-md">
+                  <p>⚠️ Advertencia</p>
+                  <p>📝 Nota importante</p>
+                  <p>💡 Idea brillante</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="example-item">
+              <h4>Columnas de contenido</h4>
+              <div class="example-container">
+                <div class="example-code">
+                  <pre><code>&lt;div class="md-columns"&gt;
+  &lt;div&gt;Columna 1&lt;/div&gt;
+  &lt;div&gt;Columna 2&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                  <button class="copy-btn" data-code="&lt;div class=&quot;md-columns&quot;&gt;&#10;  &lt;div&gt;Contenido columna 1&lt;/div&gt;&#10;  &lt;div&gt;Contenido columna 2&lt;/div&gt;&#10;&lt;/div&gt;">📋 Copiar</button>
+                </div>
+                <div class="example-preview editable-md">
+                  <div class="md-columns">
+                    <div><p>Contenido columna 1</p></div>
+                    <div><p>Contenido columna 2</p></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="example-item">
+              <h4>Video YouTube</h4>
+              <div class="example-container">
+                <div class="example-code">
+                  <pre><code>&lt;iframe src="https://www.youtube.com/embed/jNQXAC9IVRw"
+width="100%" height="300"&gt;&lt;/iframe&gt;</code></pre>
+                  <button class="copy-btn" data-code="&lt;iframe src=&quot;https://www.youtube.com/embed/jNQXAC9IVRw&quot; width=&quot;100%&quot; height=&quot;300&quot;&gt;&lt;/iframe&gt;">📋 Copiar</button>
+                </div>
+                <div class="example-preview editable-md">
+                  <iframe width="100%" height="300" src="https://www.youtube.com/embed/jNQXAC9IVRw" style="border: none; border-radius: 8px;" allowfullscreen></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="example-item">
+              <h4>Video local</h4>
+              <div class="example-container">
+                <div class="example-code">
+                  <pre><code>&lt;video width="100%" height="300" 
+controls&gt;
+  &lt;source src="video.mp4"&gt;
+&lt;/video&gt;</code></pre>
+                  <button class="copy-btn" data-code="&lt;video width=&quot;100%&quot; height=&quot;300&quot; controls&gt;&#10;  &lt;source src=&quot;video.mp4&quot;&gt;&#10;&lt;/video&gt;">📋 Copiar</button>
+                </div>
+                <div class="example-preview editable-md">
+                  <video width="100%" height="300" controls style="border-radius: 8px; background: #000;">
+                    <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                    Tu navegador no soporta video HTML5
+                  </video>
+                </div>
+              </div>
+            </div>
+
+            <div class="example-item">
+              <h4>Descargar PDF</h4>
+              <div class="example-container">
+                <div class="example-code">
+                  <pre><code>&lt;a href="/archivos/documento.pdf" 
+download&gt;
+  📥 Descargar PDF
+&lt;/a&gt;</code></pre>
+                  <button class="copy-btn" data-code="&lt;a href=&quot;/archivos/documento.pdf&quot; download&gt;&#10;  📥 Descargar PDF&#10;&lt;/a&gt;">📋 Copiar</button>
+                </div>
+                <div class="example-preview editable-md">
+                  <a href="/archivos/Formamos-lideres-transformacion-digital-IA.pdf" download style="display: inline-block; padding: 0.75rem 1.5rem; background: rgba(59, 130, 246, 0.2); border: 1px solid rgba(59, 130, 246, 0.4); border-radius: 8px; color: #60a5fa; text-decoration: none; cursor: pointer;">📥 Descargar PDF</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="example-item">
+              <h4>PDF incrustado (iframe)</h4>
+              <div class="example-container">
+                <div class="example-code">
+                  <pre><code>&lt;iframe src="/archivos/documento.pdf"
+width="100%" height="500"&gt;&lt;/iframe&gt;</code></pre>
+                  <button class="copy-btn" data-code="&lt;iframe src=&quot;/archivos/documento.pdf&quot; width=&quot;100%&quot; height=&quot;500&quot;&gt;&lt;/iframe&gt;">📋 Copiar</button>
+                </div>
+                <div class="example-preview editable-md">
+                  <iframe src="/archivos/Formamos-lideres-transformacion-digital-IA.pdf" width="100%" height="500" style="border: none; border-radius: 8px;"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="example-item">
+              <h4>PDF con embed</h4>
+              <div class="example-container">
+                <div class="example-code">
+                  <pre><code>&lt;embed src="/archivos/documento.pdf"
+width="100%" height="500" type="application/pdf"/&gt;</code></pre>
+                  <button class="copy-btn" data-code="&lt;embed src=&quot;/archivos/documento.pdf&quot; width=&quot;100%&quot; height=&quot;500&quot; type=&quot;application/pdf&quot;/&gt;">📋 Copiar</button>
+                </div>
+                <div class="example-preview editable-md" style="display: flex; align-items: center; justify-content: center;">
+                  <a href="/archivos/Formamos-lideres-transformacion-digital-IA.pdf" style="display: inline-block; padding: 0.75rem 1.5rem; background: rgba(59, 130, 246, 0.2); border: 1px solid rgba(59, 130, 246, 0.4); border-radius: 8px; color: #60a5fa; text-decoration: none; cursor: pointer;">📄 Ver PDF</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="nosotros" class="section profile-section">
+          <div class="profile-grid">
+            <aside class="profile-aside">
+              <div class="avatar"><img src="/assets/vite.svg" alt="Foto de perfil" loading="lazy"/></div>
+              <h3 class="profile-name">Perfil docente</h3>
+              <p class="profile-role">Especialista en Contabilidad y Emprendimiento</p>
+              <div class="profile-contacts">
+                <div class="contact-item"><strong>Correo:</strong> docente@tudominio.com</div>
+                <div class="contact-item"><strong>Teléfono:</strong> +34 600 000 000</div>
+              </div>
+              <a class="primary-button" href="#contacto">Contactar</a>
+            </aside>
+            <div class="profile-main">
+              <p class="profile-summary">
+                Docente con experiencia en asesoría académica, desarrollo de materiales didácticos y acompañamiento a estudiantes en proyectos formativos.
+              </p>
+              <div class="skills">
+                <span class="skill-chip">Docencia</span>
+                <span class="skill-chip">Asesoría académica</span>
+                <span class="skill-chip">Contabilidad</span>
+                <span class="skill-chip">Emprendimiento</span>
+                <span class="skill-chip">Investigación</span>
+              </div>
+              <div class="experience">
+                <h4>Experiencia laboral</h4>
+                <ol class="timeline">
+                  <li class="exp-item">
+                    <div class="exp-head">
+                      <div class="exp-title"><strong>Docente principal</strong> — <span class="exp-company">Institución Educativa</span></div>
+                      <div class="exp-period">2020 - Actualidad</div>
+                    </div>
+                    <div class="exp-details">Diseño de planes de estudio, tutorías y evaluación por competencias.</div>
+                  </li>
+                  <li class="exp-item">
+                    <div class="exp-head">
+                      <div class="exp-title"><strong>Asesor académico</strong> — <span class="exp-company">Centro de formación</span></div>
+                      <div class="exp-period">2017 - 2020</div>
+                    </div>
+                    <div class="exp-details">Acompañamiento en proyectos de emprendimiento y elaboración de informes.</div>
+                  </li>
+                </ol>
+              </div>
+              <div class="education">
+                <h4>Formación</h4>
+                <ul>
+                  <li>Maestría en Educación — Universidad Ejemplo (2019)</li>
+                  <li>Licenciatura en Contabilidad — Universidad Ejemplo (2015)</li>
+                </ul>
+              </div>
+              <div class="certifications">
+                <h4>Certificaciones</h4>
+                <ul>
+                  <li>Certificación en Innovación Educativa — 2022</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="servicios" class="section">
+          <div class="section-header">
+            <h2>Servicios principales</h2>
+            <p>Enumera los servicios que ofreces. Cada tarjeta es editable desde el archivo de contenido.</p>
+          </div>
+          <div class="card-grid">
+            <article class="card"><h3>Estrategia</h3><p>Definimos objetivos, cronograma y métricas.</p></article>
+            <article class="card"><h3>Diseño</h3><p>Creamos propuestas visuales modernas y claras.</p></article>
+            <article class="card"><h3>Soporte</h3><p>Te acompañamos después del lanzamiento.</p></article>
+          </div>
+          <div class="editable-md" data-md-src="servicios-extra"></div>
+        </section>
+
+        <section id="proyectos" class="section">
+          <div class="section-header">
+            <h2>Casos y proyectos</h2>
+            <p>Muestra resultados o referencias. Puedes cambiar títulos y descripciones sin tocar el código.</p>
+          </div>
+          <div class="pill-list">
+            <article class="pill"><h3>Proyecto Alfa</h3><p>Aumento de conversiones en 30%.</p></article>
+            <article class="pill"><h3>Proyecto Beta</h3><p>Rediseño completo en 4 semanas.</p></article>
+            <article class="pill"><h3>Proyecto Gamma</h3><p>Lanzamiento rápido con métricas claras.</p></article>
+          </div>
+          <div class="editable-md" data-md-src="Test"></div>
+        </section>
+
+        <section id="contacto" class="section">
+          <div class="section-header">
+            <h2>Hablemos de tu idea</h2>
+            <p>Incluye aquí la información básica de contacto y un llamado a la acción.</p>
+          </div>
+          <div class="contact-list">
+            <div><strong>Correo:</strong> hola@tudominio.com</div>
+            <div><strong>Teléfono:</strong> +34 600 000 000</div>
+            <div><strong>Ubicación:</strong> Madrid, ES</div>
+          </div>
+          <a class="primary-button" href="mailto:hola@tudominio.com">Escribir correo</a>
+        </section>
+
       </main>
       <footer class="footer">
-        <p>${content.footer?.text ?? ''}</p>
+        <p>© 2026 EjemploWb. Todos los derechos reservados.</p>
       </footer>
     </div>
   `
 
   const nav = app.querySelector('#site-menu')
-  const main = app.querySelector('#main-content')
   const menuToggle = app.querySelector('.menu-toggle')
+  const main = app.querySelector('#main-content')
   const sideList = app.querySelector('.side-list')
-  const markdownMode = content.__source === 'md'
-
-  const menuItems = content.menu?.length ? content.menu : DEFAULT_CONTENT.menu
-  nav.innerHTML = `
-    ${menuItems
-      .map(
-        (item) =>
-          `<a href="#${item.id}" data-view="${item.id}">${item.label}</a>`
-      )
-      .join('')}
-  `
-
-  const renderedSections = new Set()
-
-  menuItems.forEach((item) => {
-    const sectionData = content.sections?.[item.id] ?? DEFAULT_CONTENT.sections[item.id]
-    if (sectionData) {
-      const section = createSection(item.id, sectionData)
-      if (markdownMode && item.id !== 'inicio') {
-        section.innerHTML = `
-          <div class="section-header">
-            <h2>${sectionData.title ?? ''}</h2>
-            ${sectionData.subtitle ? `<p class="section-subtitle">${sectionData.subtitle}</p>` : ''}
-          </div>
-          <div class="markdown-content" data-md="${item.id}"></div>
-        `
-      }
-      main.appendChild(section)
-      renderedSections.add(item.id)
-    }
-  })
-
-  const sideMenu = content.sideMenu?.items?.length ? content.sideMenu : DEFAULT_CONTENT.sideMenu
-  sideList.innerHTML = sideMenu.items
-    .map(
-      (item) =>
-        `<button class="side-link" type="button" data-view="${item.id}" data-target="${item.target ?? item.id}">${item.label}</button>`
-    )
-    .join('')
-
-  sideMenu.items.forEach((item) => {
-    const targetId = item.target ?? item.id
-    if (renderedSections.has(targetId)) return
-    const sectionData = content.sections?.[targetId] ?? DEFAULT_CONTENT.sections[targetId]
-    if (sectionData) {
-      const section = createSection(targetId, sectionData)
-      if (markdownMode && targetId !== 'inicio') {
-        section.innerHTML = `
-          <div class="section-header">
-            <h2>${sectionData.title ?? ''}</h2>
-            ${sectionData.subtitle ? `<p class="section-subtitle">${sectionData.subtitle}</p>` : ''}
-          </div>
-          <div class="markdown-content" data-md="${targetId}"></div>
-        `
-      }
-      main.appendChild(section)
-      renderedSections.add(targetId)
-    }
-  })
+  const addSideLink = (id, label) => {
+    if (sideList.querySelector(`[data-target="${id}"]`)) return
+    const btn = document.createElement('button')
+    btn.className = 'side-link'
+    btn.type = 'button'
+    btn.dataset.target = id
+    btn.textContent = label
+    sideList.appendChild(btn)
+  }
 
   const setSideActive = (viewId) => {
-    if (!sideList) return
     sideList.querySelectorAll('.side-link').forEach((link) => {
       link.classList.toggle('is-active', link.dataset.target === viewId)
     })
@@ -766,16 +592,19 @@ const renderApp = (content) => {
       link.classList.toggle('is-active', link.dataset.view === viewId)
     })
     setSideActive(viewId)
+    try {
+      localStorage.setItem('lastView', viewId)
+    } catch (e) {
+      // ignore storage errors
+    }
   }
 
-  const initialView = window.location.hash?.replace('#', '') || menuItems[0]?.id
+  const storedView = (() => {
+    try { return localStorage.getItem('lastView') || '' } catch (e) { return '' }
+  })()
+  const initialView = window.location.hash?.replace('#', '') || storedView || 'inicio'
   if (initialView) {
     setActiveView(initialView)
-  }
-
-  if (markdownMode) {
-    const markdownSections = [...main.querySelectorAll('.markdown-content')]
-    loadMarkdownSections(markdownSections)
   }
 
   nav.addEventListener('click', (event) => {
@@ -806,12 +635,47 @@ const renderApp = (content) => {
     }
   })
 
+  // Copiar código al portapapeles
+  app.addEventListener('click', (event) => {
+    if (event.target.matches('.copy-btn')) {
+      const code = event.target.getAttribute('data-code')
+      if (code) {
+        const decodedCode = code.replace(/&#10;/g, '\n')
+        navigator.clipboard.writeText(decodedCode).then(() => {
+          const originalText = event.target.textContent
+          event.target.textContent = '✓ Copiado'
+          setTimeout(() => {
+            event.target.textContent = originalText
+          }, 2000)
+        })
+      }
+    }
+  })
+
   window.addEventListener('hashchange', () => {
     const viewId = window.location.hash?.replace('#', '')
     if (viewId) {
       setActiveView(viewId)
     }
   })
+
+  const usedIds = new Set(
+    [...app.querySelectorAll('[data-md-src]')]
+      .map((el) => el.getAttribute('data-md-src'))
+      .filter(Boolean)
+  )
+  const mdIds = getMdIdsFromModules()
+  const autoIds = mdIds.filter((id) => !usedIds.has(id))
+
+  if (autoIds.length) {
+    for (const id of autoIds) {
+      const section = createAutoMdSection(id)
+      main.appendChild(section)
+      addSideLink(id, formatMdTitle(id))
+    }
+  }
+
+  await loadMarkdownPlaceholders(app)
 }
 
-loadContent().then(renderApp)
+void renderApp()
