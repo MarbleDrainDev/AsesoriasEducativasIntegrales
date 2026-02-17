@@ -1,6 +1,7 @@
 import './style.css'
 
 const app = document.querySelector('#app')
+const baseUrl = import.meta.env.BASE_URL
 
 const markdownToHtml = (md) => {
   if (!md) return ''
@@ -124,7 +125,7 @@ const renderApp = async () => {
           </div>
         </div>
         <div class="brand">
-          <img src="/assets/vite.svg" alt="Logo" class="brand-mark">
+          <img src="${baseUrl}assets/vite.svg" alt="Logo" class="brand-mark">
           <div>
             <p class="brand-title">Ejemplo de Página Web</p>
             <p class="brand-tagline">Plantilla estática con contenido editable y arquitectura decoupled.</p>
@@ -295,12 +296,12 @@ const renderApp = async () => {
               <h4>Imágenes</h4>
               <div class="example-container">
                 <div class="example-code">
-                  <pre><code>![Alt texto](/assets/vite.svg)
+                  <pre><code>![Alt texto](${baseUrl}assets/vite.svg)
 ![Logo](./image.png width=200)</code></pre>
-                  <button class="copy-btn" data-code="![Alt texto](/assets/vite.svg)&#10;![Logo](./image.png width=200)">📋 Copiar</button>
+                  <button class="copy-btn" data-code="![Alt texto](${baseUrl}assets/vite.svg)&#10;![Logo](./image.png width=200)">📋 Copiar</button>
                 </div>
                 <div class="example-preview editable-md">
-                  <p><img src="/assets/vite.svg" alt="Alt texto" loading="lazy" style="max-width: 150px;"/></p>
+                  <p><img src="${baseUrl}assets/vite.svg" alt="Alt texto" loading="lazy" style="max-width: 150px;"/></p>
                 </div>
               </div>
             </div>
@@ -446,7 +447,7 @@ width="100%" height="500" type="application/pdf"/&gt;</code></pre>
         <section id="nosotros" class="section profile-section">
           <div class="profile-grid">
             <aside class="profile-aside">
-              <div class="avatar"><img src="/assets/vite.svg" alt="Foto de perfil" loading="lazy"/></div>
+              <div class="avatar"><img src="${baseUrl}assets/vite.svg" alt="Foto de perfil" loading="lazy"/></div>
               <h3 class="profile-name">Perfil docente</h3>
               <p class="profile-role">Especialista en Contabilidad y Emprendimiento</p>
               <div class="profile-contacts">
